@@ -25,11 +25,9 @@ TO WRITE:
 Human movement requires different parts of the body to work together. This is called movement coordination. During repeated movements, different parts of the body move together in a particular way. For example, both hands can move in the same direction or in opposite directions. These different ways of coordinating movement are called coordination patterns. 
 However, coordination patterns can change depending on the task, the environment, or the individual [@newell1986]. For example, increasing movement speed, changing instructions, or becoming fatigued can influence how a movement is performed. These factors are called constraints [@newell1986]. As these constraints change, a person may maintain the same coordination pattern or switch to another. 
 
-But why do some coordination patterns remain the same while others change? This is where the concept of equilibrium and stability becomes important. In mathematical models, a coordination pattern can be represented by an equilibrium, where the variable describing coordination remains constant over time if not disturbed. An equilibrium is stable when the variable tends to return to its original value after a small disturbance. A stable equilibrium is called an attractor because nearby states tend to move towards it over time. In contrast, at an unstable equilibrium, small disturbances cause the variable to move further way from its original values. An unstable equilibrium is called a repeller because nearby states tend to move away from it.
+In mathematical models, a coordination pattern can be represented by an equilibrium, where the variable describing coordination remains constant over time if not disturbed. An equilibrium is stable when the variable tends to return to its original value after a small disturbance. A stable equilibrium is called an attractor because nearby states tend to move towards it over time. In contrast, at an unstable equilibrium, small disturbances cause the variable to move further away from its original values. An unstable equilibrium is called a repeller because nearby states tend to move away from it.
 
-Changing a constraint can cause a previously stable coordination pattern to lose its stability, potentially causing a switch to another coordination pattern [@haken1985]. For example, when moving both index fingers in opposite directions, inceasing the movement speed can make this pattern unstable, potentially causing a switch to a pattern where both fingers move in the same direction [@kelso1988].
-
-These concepts provide a basis for investigating how an external instruction can influence the stability of different coordination patterns and potentially lead to a transition between them.
+Changing a constraint can cause a previously stable coordination pattern to lose its stability, potentially causing a switch to another coordination pattern [@haken1985]. For example, when moving both index fingers in opposite directions, inceasing the movement speed can make this pattern unstable, potentially causing a switch to a pattern where both fingers move in the same direction [@kelso1988]. These concepts provide a basis for investigating how an external instruction can influence the stability of different coordination patterns and potentially lead to a transition between them.
 
 ## Problem and research question
 
@@ -43,9 +41,7 @@ TO WRITE:
 
 To investigate how a change in a constraint can affect the stability of coordination patterns, we consider a simplified situation in which an athlete repeatedly performs a movement and may prefer one of two possible coordination patterns: Pattern A or Pattern B. These patterns are abstract and do not represent specific movements, such as walking or running. 
 
-In this project, the constraint being investigated is an external instruction that encourages the athlete to prefer Pattern B. If the athlete initially prefers Pattern A, we want to investigate whether an instruction favouring Pattern B is sufficient to make the original preference lose its stability and lead to a transition towards Pattern B.
-
-This leads to the followig research question: How does an external instruction favouring Pattern B affect the stability of the coordination preferences, and can it lead to a transition between them?
+In this project, the constraint being investigated is an external instruction that encourages the athlete to prefer Pattern B. If the athlete initially prefers Pattern A, we want to investigate whether an instruction favouring Pattern B is sufficient to make the original preference lose its stability and lead to a transition towards Pattern B. This leads to the followig research question: How does an external instruction favouring Pattern B affect the stability of the coordination preferences, and can it lead to a transition between them?
 
 ## Objectives and scientific approach
 
