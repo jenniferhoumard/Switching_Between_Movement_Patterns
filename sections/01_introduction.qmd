@@ -44,6 +44,12 @@ TO WRITE:
 - Do not answer the question yet. The later sections will investigate it.
 -->
 
+To investigate how a change in a constraint can affect the stability of coordination patterns, we consider a simplified situation in which an athlete repeatedly performs a movement and may prefer one of two possible coordination patterns. Pattern A or Pattern B. These patterns are abstract and do not represent specific movements, such as walking or running. 
+
+In this project, the constraint being investigated is an external instruction that encourages the athlete to prefer Pattern B. If the athlete initially prefers Pattern A, we want to investigate whether an instruction favouring Pattern B is sufficient to make the original preference lose its stability and lead to a transition towards Pattern B.
+
+This leads to the followig research question: How does an external instruction favouring Pattern B affect the stability of the coordination preferences, and can it lead to a transition between them?
+
 ## Objectives and scientific approach
 
 <!--
