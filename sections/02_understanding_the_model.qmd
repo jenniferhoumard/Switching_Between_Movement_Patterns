@@ -1,0 +1,115 @@
+
+<!--
+PAGE GUIDE: About 1 page.
+
+GOAL:
+Explain the mathematical model, how it works,
+and what it represents.
+
+The page length includes text, figures, and tables.
+It is a guide, not a strict requirement.
+-->
+
+## State variable and parameters
+
+<!--
+TO WRITE:
+
+1. Introduce the model.
+   - Explain that the model describes how an athlete's
+     preference for a movement pattern changes over time.
+   - Present the equation given in the assignment:
+     dx/dt = ax - bx³ + I
+     a = 1.2 and b = 0.8.
+   - Use [@course2026] to cite the assignment.
+
+2. Explain the variables.
+   - x: the athlete's preference for a movement pattern.
+   - x < 0: Pattern A is preferred.
+   - x > 0: Pattern B is preferred.
+   - x = 0: neither pattern is preferred.
+   - dx/dt: how the preference changes over time.
+
+3. Explain each part of the equation.
+   - ax: pushes the preference further away from zero.
+   - -bx³: prevents the preference from becoming too large.
+   - I: an instruction that pushes the preference
+     towards Pattern A or Pattern B.
+   - Explain that a positive I favours Pattern B,
+     while a negative I favours Pattern A.
+
+4. Explain how the model works.
+   - The three terms act together to change x.
+   - Depending on their combined effect, x can
+     increase, decrease, or remain constant.
+
+5. Clarify what the values represent.
+   - x does not represent the position of a body part.
+   - I does not represent exercise intensity.
+   - x is not limited to values between -1 and 1.
+   - The model uses scaled values without physical units.
+-->
+
+## Meaning of an equilibrium
+
+<!--
+TO WRITE:
+
+1. Define an equilibrium.
+   - Explain that it is a value of x where the
+     preference stops changing.
+   - Show that this happens when dx/dt = 0.
+   - Clarify that the athlete does not stop moving.
+     Only the preference stays constant.
+
+2. Explain stable and unstable equilibria.
+   - Stable: nearby preferences move back towards
+     the equilibrium.
+   - Unstable: nearby preferences move away
+     from the equilibrium.
+
+3. Link equilibrium to movement coordination.
+   - Explain that a stable equilibrium represents
+     a preference the athlete tends to maintain.
+   - Explain that an unstable equilibrium
+     cannot easily be maintained after a small change.
+
+4. Connect to the next sections.
+   - Mention that Sections 3 and 5 will identify
+     the equilibria and study their stability.
+   - Do not calculate the equilibria here.
+-->
+
+## Scope and assumptions
+
+<!--
+TO WRITE:
+
+1. Explain why the model is simplified.
+   - It uses only one variable to describe
+     coordination preference.
+   - It studies two abstract movement patterns,
+     not specific movements such as walking or running.
+
+2. Present the main assumptions.
+   - The parameters a and b stay constant.
+   - The instruction I stays constant during
+     each simulation.
+   - The model uses values from the assignment,
+     not measurements from real athletes.
+
+3. Explain what the model can help us understand.
+   - Which coordination preferences can be stable.
+   - How an instruction can change these preferences.
+   - How the preference changes over time.
+
+4. Explain what the model cannot tell us.
+   - The exact movement performed by an athlete.
+   - How a real athlete would respond to an instruction.
+
+5. Link to Section 3.
+   - Explain that we will first study the model
+     without an instruction (I = 0).
+   - This will help us understand which preferences
+     are stable before changing the instruction.
+-->

@@ -1,0 +1,206 @@
+<!--
+PAGE GUIDE: About 2 pages.
+
+GOAL:
+Study what changes when the instruction becomes
+positive (I = 0.70).
+
+Find the new equilibrium, simulate the model
+again, and compare the results with the case
+I = 0 from Sections 3 and 4.
+
+Include the new graph, the new simulations,
+and a clear comparison with the previous case.
+
+The page length includes text, figures, and tables.
+It is a guide, not a strict requirement.
+-->
+
+## Equilibria with a positive instruction ($I=0.70$)
+
+<!--
+TO WRITE:
+
+1. Introduce the new condition.
+   - Explain that we now keep the same model,
+     but change the instruction value to I = 0.70.
+   - Explain that a, b, the x-range, and the
+     general method all stay the same.
+   - Only the instruction changes.
+
+2. Write the new equation.
+   - Show the equation with I = 0.70:
+     dx/dt = 1.2x - 0.8x³ + 0.70
+   - Explain that the positive instruction
+     favours Pattern B.
+
+3. Present the graph.
+   - Plot f(x) from x = -2 to x = 2.
+   - Explain the axes:
+     - Horizontal axis: coordination preference (x).
+     - Vertical axis: rate of change (dx/dt).
+   - Refer to @fig-cue-vector.
+
+4. Find the equilibrium.
+   - Explain that an equilibrium is where
+     the curve crosses the horizontal axis.
+   - Show that there is only one crossing.
+   - Give the approximate value:
+     x ≈ +1.450
+   - Explain that this means the model now has
+     only one equilibrium in this condition.
+
+5. Connect to the next subheading.
+   - Explain that we must now check whether
+     this equilibrium is stable.
+   - Explain that we will use the arrow directions
+     on the graph to do this.
+-->
+
+<!--
+CODE GUIDE — Similar to Section 3.
+
+1. Create x-values.
+   - Use np.linspace(-2, 2, 400).
+
+2. Calculate the rate of change.
+   - Use the equation directly:
+     y = 1.2*x - 0.8*x**3 + 0.70
+
+3. Plot the curve.
+   - Use ax.plot(x, y).
+   - Use ax.axhline(0) to show the zero line.
+
+4. Find the equilibrium.
+   - Use np.roots() with the polynomial:
+     -0.8*x^3 + 0*x^2 + 1.2*x + 0.70 = 0
+   - Keep only the real root.
+   - Mark the real equilibrium on the graph
+     using ax.scatter().
+
+5. Add arrows to show the direction of change.
+   - Choose a few x-values on each side
+     of the equilibrium.
+   - Check whether y is positive or negative.
+   - Positive means the preference moves right.
+   - Negative means the preference moves left.
+
+The libraries np and plt are already imported in the master QMD. Run the code cell in the master QMD.
+-->
+
+## Simulations with the positive instruction
+
+<!--
+TO WRITE:
+
+1. Introduce the new simulations.
+   - Explain that we now repeat the Euler method
+     with I = 0.70.
+   - Explain that all other settings stay the same
+     as in Section 4.
+
+2. State the simulation settings.
+   - I = 0.70
+   - h = 0.01
+   - time from 0 to 20
+   - starting values:
+     x(0) = -1.8 and x(0) = +1.8
+   - Use [@course2026] for the assignment settings.
+
+3. Explain the purpose.
+   - We want to see how the preference changes
+     over time when the instruction is positive.
+   - We also want to check whether both starting
+     values go to the same final state.
+
+4. Present the graph.
+   - Explain the axes:
+     - Horizontal axis: time (t)
+     - Vertical axis: coordination preference (x)
+   - Refer to @fig-cue-trajectories.
+   - Do not fully interpret the results yet.
+     That belongs in the next subheading.
+-->
+
+<!--
+CODE GUIDE — Similar to Section 4.
+
+1. Set up the simulation.
+   - Use I = 0.70.
+   - Use h = 0.01.
+   - Create time values from 0 to 20.
+
+2. Create arrays.
+   - Use np.zeros() to store the values
+     for both starting conditions.
+   - Set the first value of one array to -1.8.
+   - Set the first value of the other to +1.8.
+
+3. Apply the Euler method.
+   - Use a for loop.
+   - At each step use:
+     x_new = x_old + h*(1.2*x_old - 0.8*x_old**3 + I)
+
+4. Plot the two trajectories.
+   - Use ax.plot() for both lines.
+   - Add labels, axis names, and a legend.
+
+5. Check the graph.
+   - Both lines should end near the same
+     positive equilibrium.
+-->
+
+## Comparing both instruction conditions
+
+<!--
+TO WRITE:
+
+1. Compare the equilibria.
+   - For I = 0, Section 3 found three equilibria:
+     about -1.225, 0, and +1.225.
+   - For I = 0.70, this section found one
+     equilibrium near +1.450.
+   - Explain clearly what changed.
+
+2. Compare stability.
+   - For I = 0, the two outer equilibria
+     were stable and x = 0 was unstable.
+   - For I = 0.70, the remaining equilibrium
+     is stable.
+   - Explain that the negative stable state
+     is no longer present.
+
+3. Compare the simulations.
+   - For I = 0, the final state depended on
+     the starting value.
+   - For I = 0.70, both starting values move
+     towards the same positive equilibrium.
+   - Explain that the instruction changes
+     the long-term behaviour of the model.
+
+4. Use the comparison graph.
+   - Refer to @fig-compare-cues.
+   - Explain what the solid and dashed lines mean.
+   - Explain what the graph shows overall.
+
+5. State the main conclusion of this section.
+   - In this model, a positive instruction
+     removes the stable negative state.
+   - As a result, both trajectories move
+     towards the positive stable equilibrium.
+   - Keep the conclusion about the model only.
+   - Leave the broader interpretation and
+     limitation discussion for Section 6.
+-->
+
+<!--
+CODE GUIDE — Comparison plot.
+
+1. Repeat the simulation for I = 0.
+2. Repeat the simulation for I = 0.70.
+3. Keep the same starting values:
+   -1.8 and +1.8.
+4. Plot all four trajectories on one graph.
+5. Use clear labels so the two conditions
+   can be compared easily.
+-->

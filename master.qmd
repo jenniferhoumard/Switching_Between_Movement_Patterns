@@ -1,0 +1,96 @@
+
+---
+title: "Switching Between Movement Patterns"
+subtitle: "Mathematical Modeling — IEAP Final Project, Group E"
+author:
+  - name: "Gaia Gassole"
+  - name: "Chloé Gilles"
+  - name: "Jennifer Houmard"
+date: today
+date-format: "D MMMM YYYY"
+bibliography: references.bib
+csl: styles/apa.csl
+lang: en
+
+execute:
+  echo: false
+  warning: false
+  message: false
+
+format:
+  pdf:
+    pdf-engine: xelatex
+    documentclass: article
+    toc: true
+    toc-depth: 2
+    number-sections: true
+    colorlinks: true
+    geometry:
+      - margin=2.2cm
+    fontsize: 11pt
+    code-overflow: wrap
+    fig-pos: H
+    include-in-header:
+      text: |
+        \usepackage{fvextra}
+        \DefineVerbatimEnvironment{Highlighting}{Verbatim}{breaklines,commandchars=\\\{\}}
+        \usepackage{float}
+        \usepackage{microtype}
+        \emergencystretch=3em
+
+jupyter: python3
+---
+
+```{=latex} 
+\clearpage
+```
+
+```{python}
+#| label: setup
+#| include: false
+
+# Python libraries used throughout the project
+import numpy as np
+import matplotlib.pyplot as plt
+```
+
+# Introduction
+
+{{< include sections/01_introduction.qmd >}}
+
+# Understanding the Model
+
+{{< include sections/02_understanding_the_model.qmd >}}
+
+# Equilibria and Stability
+
+{{< include sections/03_equilibria_and_stability.qmd >}}
+
+# Euler Simulations
+
+{{< include sections/04_euler_simulations.qmd >}}
+
+# Effect of Parameters
+
+{{< include sections/05_effect_of_parameters.qmd >}}
+
+# Discussion and Conclusion
+
+{{< include sections/06_discussion_and_conclusion.qmd >}}
+
+```{=latex} 
+\clearpage
+```
+
+# References {.unnumbered}
+
+::: {#refs}
+:::
+
+```{=latex}
+\clearpage
+```
+
+# Appendix A {.unnumbered}
+
+{{< include sections/07_appendix.qmd >}}

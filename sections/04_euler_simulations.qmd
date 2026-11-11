@@ -1,0 +1,203 @@
+
+<!--
+PAGE GUIDE: About 1.5 pages.
+
+GOAL:
+Use Python to simulate how the coordination
+preference changes over time when I = 0.
+
+Compare two starting values and check whether
+the results agree with the stable equilibria
+found in Section 3.
+
+Include the Euler method, a graph showing both
+simulations, and an explanation of the results.
+
+The page length includes text, figures, and tables.
+It is a guide, not a strict requirement.
+-->
+
+## Explicit Euler method
+
+<!--
+TO WRITE:
+
+1. Introduce the numerical simulation.
+   - Explain that Section 3 showed which
+     equilibria are stable or unstable.
+   - We now want to see how the preference
+     changes over time.
+   - Explain that we will use Python and
+     the explicit Euler method.
+
+2. Explain the Euler method.
+   - Explain that Euler calculates how x changes
+     by taking small steps forward in time.
+   - Show the Euler formula:
+     x(n+1) = x(n) + h * f(x(n))
+   - Explain each part:
+     - x(n): the current preference.
+     - x(n+1): the preference at the next step.
+     - h: the size of the time step.
+     - f(x(n)): the rate of change at that step.
+   - Show how the formula uses our model:
+     x(n+1) = x(n) + h*(1.2*x(n) - 0.8*x(n)³ + I)
+
+3. Present the simulation settings.
+   - Set I = 0 because there is no instruction.
+   - Use h = 0.01.
+   - Simulate from t = 0 to t = 20.
+   - Use two starting values:
+     x(0) = -1.8 and x(0) = +1.8.
+   - Explain that only the starting value changes
+     between these two simulations.
+   - These settings come from the assignment.
+     Use [@course2026].
+
+4. Introduce the graph.
+   - Explain that the graph shows how the
+     preference changes over time.
+   - Explain the axes:
+     - Horizontal: time (t).
+     - Vertical: coordination preference (x).
+   - Refer to @fig-baseline-trajectories.
+   - Leave the interpretation of the lines
+     for the next subheading.
+-->
+
+<!--
+CODE GUIDE — Based on Session 2 Lab: Euler's Method.
+
+1. Set up the simulation.
+   - Set I = 0.
+   - Set h = 0.01.
+   - Use np.linspace() to create the time values
+     from 0 to 20.
+
+2. Prepare the starting values.
+   - Use np.zeros() to create two arrays.
+   - The arrays will store the preference at
+     every time step.
+   - Set the first value of one array to -1.8.
+   - Set the first value of the other to +1.8.
+
+3. Apply the Euler method.
+   - Use a for loop to go through the time steps.
+   - At each step, calculate the new value of x.
+   - Use the formula:
+     x_new = x_old + h*(1.2*x_old - 0.8*x_old³ + I)
+   - Repeat this for both starting values.
+
+4. Create the graph.
+   - Use plt.subplots() to create a figure.
+   - Use ax.plot() to draw both simulations.
+   - Use different colours for the two lines.
+   - Add axis labels and a legend.
+   - Show the graph using plt.show().
+
+5. Check the graph.
+   - Both lines should start at the correct values.
+   - The lines should gradually approach
+     their respective stable equilibria.
+   - The graph should cover t = 0 to t = 20.
+
+The libraries np and plt are already imported
+in the master QMD.
+No extra imports or custom functions are needed.
+-->
+
+
+## Long-term behaviour
+
+<!--
+TO WRITE:
+
+1. Describe the results shown in the graph.
+   - Explain what happens to the line starting
+     at x(0) = -1.8.
+   - Explain what happens to the line starting
+     at x(0) = +1.8.
+   - Describe whether the preferences increase,
+     decrease, or become stable over time.
+
+2. Identify the final preferences.
+   - Check the values reached by both simulations.
+   - The negative starting value should approach
+     approximately -1.225.
+   - The positive starting value should approach
+     approximately +1.225.
+   - Explain that the two simulations approach
+     different final preferences.
+
+3. Connect the results to Section 3.
+   - Compare the final values with the stable
+     equilibria found in Section 3.
+   - Refer to @fig-baseline-vector.
+   - Explain that both simulations move towards
+     the stable equilibria predicted by the graph.
+   - Explain that this agrees with the
+     stability analysis.
+
+4. Explain what the results mean.
+   - The negative starting preference moves
+     towards the stable state for Pattern A.
+   - The positive starting preference moves
+     towards the stable state for Pattern B.
+   - Explain that the starting preference affects
+     which stable state is reached.
+   - Remember that these are simulated results,
+     not measurements from real athletes.
+-->
+
+## Numerical implementation check
+
+<!--
+TO WRITE:
+
+1. Check the number of Euler steps.
+   - The simulation runs from 0 to 20.
+   - The step size is h = 0.01.
+   - Calculate: 20 / 0.01 = 2000 steps.
+   - There should be 2001 time values,
+     including the starting point.
+
+2. Check the Python results.
+   - Use len(t) to check the number of time values.
+   - Check the last value of both arrays:
+     x_A[-1] and x_B[-1].
+   - Compare these values with the stable
+     equilibria found in Section 3.
+   - Check that the final values are close
+     to -1.225 and +1.225.
+
+3. Explain why these checks matter.
+   - They help confirm that the simulation
+     uses the correct settings.
+   - They help check that the numerical results
+     agree with the mathematical analysis.
+   - Do not claim this proves the model
+     describes real athletes correctly.
+
+4. Connect to Section 5.
+   - Explain that we have now studied the model
+     without an external instruction.
+   - Section 5 will repeat the analysis with
+     a positive instruction (I = 0.70).
+   - We will compare how the stable preferences
+     and simulation results change.
+   - Do not present the new results here.
+-->
+
+<!--
+OPTIONAL CODE CHECK:
+
+After running the simulation, use these commands
+to check the values:
+
+len(t)       # Number of time values
+len(t) - 1   # Number of Euler steps
+x_A[-1]      # Final negative preference
+x_B[-1]      # Final positive preference
+
+Run these checks in Python and report the relevant findings in the section.
+-->

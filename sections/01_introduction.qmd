@@ -1,0 +1,47 @@
+<!--
+PAGE GUIDE: About 0.75 page.
+
+GOAL:
+Introduce the topic, explain the problem, and
+describe what we will do in this project.
+
+The page length includes text, figures, and tables.
+It is a guide, not a strict requirement.
+-->
+
+## Scientific context
+
+<!--
+TO WRITE:
+- Start by saying that people can repeat a movement using a stable coordination pattern.
+- Explain "stable" simply: if the pattern changes a little, it tends to return.
+- Introduce "attractor": a stable pattern that the system tends to return to.
+- Use Haken, Kelso and Bunz (1985) to support the idea of attractors. Citation: [@haken1985].
+- Introduce "self-organization": a movement pattern can form through the way parts of a system work together.
+- Use Kelso and Schöner (1988) to support self-organization. Citation: [@kelso1988].
+- Do not explain the equation or the results here.
+-->
+
+## Problem and research question
+
+<!--
+TO WRITE:
+- Explain the situation: an athlete repeats a movement and may prefer Pattern A or Pattern B.
+- Explain that an instruction may encourage the athlete to prefer Pattern B.
+- Write one research question asking whether the instruction changes which patterns are stable.
+- Do not answer the question yet. The later sections will investigate it.
+-->
+
+## Objectives and scientific approach
+
+<!--
+TO WRITE:
+- Explain the steps of the project in order:
+  1. Explain the mathematical model.
+  2. Find the stable and unstable points when I = 0.
+  3. Simulate the model using Euler's method in Python.
+  4. Repeat the analysis with I = 0.70.
+  5. Compare the results.
+- Mention the two starting values: -1.8 and +1.8.
+- Explain that we use a mathematical model, not data collected from real athletes.
+-->

@@ -1,0 +1,209 @@
+
+<!--
+PAGE GUIDE: About 1.75 pages.
+
+GOAL:
+Explain what we learned from the results and
+how they relate to movement coordination.
+
+Connect the mathematical findings to scientific
+theory, explain the limitations of the model,
+and answer the research question.
+
+Finish by explaining what each group member
+contributed to the project.
+
+The page length includes text, figures, and tables.
+It is a guide, not a strict requirement.
+-->
+
+## Main findings
+
+<!--
+TO WRITE:
+
+1. Remind the reader of the project objective.
+   - We wanted to understand how an external
+     instruction can change the stable
+     coordination preferences of an athlete.
+   - Explain that we studied two conditions:
+     I = 0 and I = 0.70.
+
+2. Summarize the main mathematical results.
+   - When I = 0, the model has two stable
+     equilibria and one unstable equilibrium.
+   - When I = 0.70, only one stable
+     positive equilibrium remains.
+   - Explain that the negative stable
+     equilibrium disappears.
+
+3. Connect the stability analysis to the
+   Python simulations.
+   - The stability graphs showed which
+     equilibria attract nearby values.
+   - The Euler simulations showed how the
+     preference changes over time.
+   - Explain that both methods give
+     results that agree with each other.
+
+4. Explain the main finding.
+   - Without an instruction, the final
+     preference depends on the starting value.
+   - With the positive instruction, both
+     starting values approach Pattern B.
+   - Explain that changing the instruction
+     changes which stable preferences
+     are possible in the model.
+
+5. Avoid repeating previous sections.
+   - Focus on what the results mean together.
+   - Do not repeat all calculations or
+     describe every graph again.
+-->
+
+## Link to coordination dynamics
+
+<!--
+TO WRITE:
+
+1. Connect the results to attractors.
+   - Explain that an attractor is a stable
+     state towards which nearby values move.
+   - Connect this to the two stable equilibria
+     found when I = 0.
+   - Explain that the unstable equilibrium
+     is a state that nearby values move away from.
+   - Use Haken, Kelso and Bunz (1985) to
+     support the link between stable movement
+     patterns and attractors.
+     Citation: [@haken1985].
+
+2. Connect the results to self-organization.
+   - Explain that movement patterns can
+     become stable through the way a system
+     changes over time.
+   - Explain that the model approaches stable
+     states without us choosing the final
+     preference at every step.
+   - Use Kelso and Schöner (1988) to support
+     the idea of self-organized coordination.
+     Citation: [@kelso1988].
+
+3. Explain changes in stability.
+   - Explain that changing a parameter can
+     change which stable states exist.
+   - Connect this to the disappearance of
+     the negative stable equilibrium when
+     I changes from 0 to 0.70.
+   - Use Warren (2006) to connect attractors
+     and changes in stability to behaviour.
+     Citation: [@warren2006].
+
+4. Connect the instruction to constraints.
+   - Explain that an instruction can be
+     considered a task-related constraint.
+   - Explain that constraints can influence
+     how movement patterns are organized.
+   - Connect this to I, which changes
+     the behaviour of our model.
+   - Use Newell (1986) to explain the role
+     of individual, task, and environmental
+     constraints in movement coordination.
+     Citation: [@newell1986].
+   - You can also use Newell and Rovegno
+     (2021) to explain how instructions
+     can influence movement learning.
+     Citation: [@newellrovegno2021].
+
+5. Make the connection clear.
+   - Explain that these studies help us
+     understand the ideas behind our model.
+   - Do not claim that these researchers
+     tested the exact equation used here.
+   - Do not claim that our simulations
+     prove how real athletes behave.
+-->
+
+## Limitations and interpretation
+
+<!--
+TO WRITE:
+
+1. Explain why the model is simplified.
+   - It uses only one variable to represent
+     coordination preference.
+   - Pattern A and Pattern B are abstract.
+   - They do not represent specific
+     movements or body positions.
+
+2. Explain the limits of the parameters.
+   - The values a = 1.2, b = 0.8,
+     and I = 0.70 were given in the assignment.
+   - They were not measured from athletes.
+   - We cannot say that a real athlete would
+     switch patterns with this instruction value.
+
+3. Explain what the model does not include.
+   - Differences between athletes.
+   - Learning and changes with practice.
+   - Fatigue during movement.
+   - Random changes or variability.
+   - Instructions that change over time.
+   - Explain briefly why these factors
+     could affect real movement behaviour.
+
+4. Explain what this means for our results.
+   - The results show what happens in
+     this mathematical model.
+   - They do not predict exactly how
+     a real athlete would respond.
+   - The model helps us understand a
+     possible way that switching can occur,
+     but it is not proof that real
+     movement follows this equation.
+
+5. Explain the value of the model.
+   - Even though it is simplified,
+     it helps us study stable and
+     unstable coordination preferences.
+   - It shows how changing one parameter
+     can change the long-term behaviour
+     of a system.
+   - Do not repeat the full results here.
+-->
+
+## Conclusion
+
+<!--
+TO WRITE:
+
+1. Answer the research question.
+   - Explain whether the instruction changed
+     the stable coordination preferences.
+   - State the difference between I = 0
+     and I = 0.70.
+
+2. Summarize what the methods showed.
+   - The equilibrium graphs helped identify
+     stable and unstable states.
+   - The Euler simulations showed how the
+     preference moved towards those states.
+   - Explain that both methods agreed.
+
+3. Explain what the project teaches us.
+   - A system can have more than one
+     stable coordination preference.
+   - An external instruction can change
+     which preferences remain stable.
+   - This helps us understand how switching
+     between patterns can occur in a
+     simplified mathematical model.
+
+4. Finish the report.
+   - Give one clear final message about
+     stability and switching.
+   - Do not introduce new calculations,
+     figures, or references.
+   - Keep the conclusion focused on
+     answering the project question.
+-->

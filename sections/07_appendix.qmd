@@ -1,0 +1,48 @@
+
+<!--
+PAGE GUIDE: About 1 page, or longer if needed.
+
+GOAL:
+Include extra information that supports the
+report and clearly identify each group member's
+contribution.
+
+The appendix is not included in the
+10-page limit of the main report.
+-->
+
+## Additional numerical checks
+
+<!--
+TO INCLUDE:
+- Add extra calculations or numerical checks
+  only if they are useful.
+- For example, include a small table comparing
+  the equilibrium values with the final values
+  from the Euler simulations.
+- Do not repeat calculations, figures, or
+  explanations already shown in the report.
+- Remove this subheading if there is no
+  additional information worth including.
+-->
+
+## Group contributions
+
+<!--
+TO INCLUDE:
+
+1. List the four group members.
+   - Use their full names.
+
+2. Explain what each person did.
+   - Identify the sections they completed.
+   - Mention their main responsibilities,
+     such as mathematics, Python simulations,
+     scientific research, or report integration.
+   - Only include work they actually completed.
+
+3. Present the contributions in a small table.
+   - Name
+   - Sections
+   - Main contributions
+-->
