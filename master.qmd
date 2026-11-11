@@ -8,6 +8,10 @@ author:
   - name: "Jennifer Houmard"
 date: today
 date-format: "D MMMM YYYY"
+thanks: |
+  Project repository:
+  \url{https://github.com/jenniferhoumard/Switching_Between_Movement_Patterns}
+
 bibliography: references.bib
 csl: styles/apa.csl
 lang: en
@@ -40,6 +44,8 @@ format:
 
 jupyter: python3
 ---
+
+
 
 ```{=latex} 
 \clearpage
