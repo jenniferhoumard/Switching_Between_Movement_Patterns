@@ -22,6 +22,18 @@ TO WRITE:
 - Do not explain the equation or the results here.
 -->
 
+Human movement requires different parts of the body to work together. This is called movement coordination. During repeated movements, different parts of the body move together in a particular way. For example, both hands can move in the same direction or in opposite directions. These different ways of coordinating movement are called coordination patterns. 
+
+However, this pattern can change depending on the task, the environment, or the individual [@newell1986]. For example, increasing movement speed, changing instructions, or the development of fatigue can influence how a movement is performed. These factors are called constraints [@newell1986]. As these constraints change, a person may maintain the same coordination pattern or switch to another. 
+
+But why do some coordination patterns remain the same while others change? This is where the concept of equilibrium and stability becomes important. In mathematical models, a coordination pattern can be represented by an equilibrium, where the variable describing coordination remains constant over time if not disturbed. A equilibrium is stable when the variable tends to return to its original value after a small disturbance. Such stable state acts as an attractor. In contrast, at an unstable equilibrium, small disturbances cause the variable to move further way from its original values. 
+
+Changing a constraint can affect a previously stable coordination pattern to lose its stability, potentially causing a switch to another coordination pattern [@haken1985]. 
+
+For example, when moving both index fingers in opposite directions, inceasing the movement speed can make this pattern unstable, leading to a transition towards moving them together in the same direction  [@kelso1988].
+
+These concepts provide a basis for investigating how an external instruction can influence the stability of different coordination patterns and potentially lead to a transition between them.
+
 ## Problem and research question
 
 <!--
