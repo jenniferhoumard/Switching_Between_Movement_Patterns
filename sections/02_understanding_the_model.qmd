@@ -73,6 +73,15 @@ TO WRITE:
 
 ## Meaning of an equilibrium
 
+An equilibrium is a value of $x$ where the preference stops changing. This happens when $\dot{x} = 0$. The athlete preference does not change, it remains constant. It does not mean that the athlete stops moving. It does not mean that the athlete has no preference. It means that the athlete prefer a pattern and at an equilibrium, the preference does not change anymore.
+
+The equilibria can be stable or unstable. An equilibrium is stable when, after a small disturbance, the preference returns to the equilibrium. An equilibrium is unstable when, after a small disturbance, the preference moves away from the equilibrium. 
+
+If we take the example of the athlete, a stable equilibrium represents a coorination preference that is maintained despite small disturbances (fatigue, brief loss of focus, etc.). An unstable equilibrium corresponds for the athlete as a state of hesitation between the two patterns. This hesitation will make the athlete switch to one of the two patterns after a small disturbance.
+
+Later in our work, equilibria will be identified and their stability will be determined. In Section 3, we will study the model without an instruction ($I=0$). In Section 5, the model with a positive instruction ($I>0$) will be examined.
+
+
 <!--
 TO WRITE:
 
@@ -102,6 +111,8 @@ TO WRITE:
 -->
 
 ## Scope and assumptions
+
+
 
 <!--
 TO WRITE:
