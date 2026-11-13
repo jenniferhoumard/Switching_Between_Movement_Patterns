@@ -1,4 +1,3 @@
-
 <!--
 PAGE GUIDE: About 1 page.
 
@@ -11,6 +10,28 @@ It is a guide, not a strict requirement.
 -->
 
 ## State variable and parameters
+
+This model is used to describe how an athlete's preference for a coordination pattern changes over time. The model is represented by the following differential equation [@course2026]:
+
+$$
+\dot{x} = f(x) = a\,x - b\,x^{3} + I, \qquad a = 1.2,\; b = 0.8
+$$
+
+Here, $\dot{x}$ indicates at what speed the preference $x$ changes over time (derivative of $x$ with respect to time).
+
+The state variable $x$ represents the preference for a movement pattern. We can interpret the values of $x$ thanks to its sign. When $x<0$, the athlte favours pattern A. When $x>0$, the athlete favours pattern B.
+
+## $ax$ term
+
+It is a linear term. $ax$ and $x$ have the same sign. Hence, $a$ amplifies the preference. If $x<0$, $a$ will be negative as well, so the preference pattern A will be reinforced. On the contrary, if $x>0$, $a$ will be positive,so the preference pattern B will be reinforced. In both cases, the preference is pushed away from zero.
+
+## $-bx^{3}$ term
+
+It is a cubic term. $-bx^{3}$ and $x$ have opposite signs. Hence, $b$ attenuates the preference. If $x<0$, $-bx^{3}$ will be positive, so the preference pattern A will be weakened. On the contrary, if $x>0$, $-bx^{3}$ will be negative, so the preference pattern B will be weakened. In both cases, the preference is pushed towards zero.
+
+## $I$ term
+
+$I$ is a constant. When $I$ is positive, it favours pattern B. When $I$ is negative, it favours pattern A. I is an external component, that is to say, it is not influenced by the preference $x$. It can be interpreted as an instruction given to the athlete, for example from a coach.
 
 <!--
 TO WRITE:
