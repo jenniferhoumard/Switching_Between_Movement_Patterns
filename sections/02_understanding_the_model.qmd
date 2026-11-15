@@ -19,17 +19,17 @@ $$
 
 Here, $\dot{x}$ indicates at what speed the preference $x$ changes over time (derivative of $x$ with respect to time).
 
-The state variable $x$ represents the preference for a movement pattern. We can interpret the values of $x$ thanks to its sign. When $x<0$, the athlte favours pattern A. When $x>0$, the athlete favours pattern B.
+The state variable $x$ represents the preference for a movement pattern. We can interpret the values of $x$ thanks to its sign. When $x<0$, the athlete favours pattern A. When $x>0$, the athlete favours pattern B. When $x=0$, the athlete does not favour either pattern. The magnitude of $x$ indicates how strong the preference is. Values close to zero indicate a weak preference, while larger values correspond to a strong preference.
 
-## $ax$ term
+**$ax$ term**
 
-It is a linear term. $ax$ and $x$ have the same sign. Hence, $a$ amplifies the preference. If $x<0$, $a$ will be negative as well, so the preference pattern A will be reinforced. On the contrary, if $x>0$, $a$ will be positive,so the preference pattern B will be reinforced. In both cases, the preference is pushed away from zero.
+It is a linear term. Since $a$ is positive, $ax$ and $x$ have the same sign. Hence, $ax$ amplifies the preference. If $x<0$, $ax$ will be negative as well, so the preference for pattern A will be reinforced. On the contrary, if $x>0$, $ax$ will be positive, so the preference for pattern B will be reinforced. In both cases, the preference is pushed away from zero.
 
-## $-bx^{3}$ term
+**$-bx^{3}$ term**
 
-It is a cubic term. $-bx^{3}$ and $x$ have opposite signs. Hence, $b$ attenuates the preference. If $x<0$, $-bx^{3}$ will be positive, so the preference pattern A will be weakened. On the contrary, if $x>0$, $-bx^{3}$ will be negative, so the preference pattern B will be weakened. In both cases, the preference is pushed towards zero.
+It is a cubic term. Since $b$ is positive, $-bx^{3}$ and $x$ have opposite signs. Hence, it attenuates the preference. If $x<0$, $-bx^{3}$ will be positive, so the preference for pattern A will be weakened. On the contrary, if $x>0$, $-bx^{3}$ will be negative, so the preference for pattern B will be weakened. In both cases, the preference is pushed towards zero.
 
-## $I$ term
+**$I$ term**
 
 $I$ is a constant. When $I$ is positive, it favours pattern B. When $I$ is negative, it favours pattern A. I is an external component, that is to say, it is not influenced by the preference $x$. It can be interpreted as an instruction given to the athlete, for example from a coach.
 
@@ -70,14 +70,13 @@ TO WRITE:
    - x is not limited to values between -1 and 1.
    - The model uses scaled values without physical units.
 -->
-
 ## Meaning of an equilibrium
 
-An equilibrium is a value of $x$ where the preference stops changing. This happens when $\dot{x} = 0$. The athlete preference does not change, it remains constant. It does not mean that the athlete stops moving. It does not mean that the athlete has no preference. It means that the athlete prefer a pattern and at an equilibrium, the preference does not change anymore.
+An equilibrium is a value of $x$ where the preference stops changing. This happens when $\dot{x} = 0$. The athlete's preference does not change, it remains constant. It does not mean that the athlete stops moving. It does not mean that the athlete has no preference. It means that the athlete prefer a pattern and at an equilibrium, the preference does not change anymore.
 
 The equilibria can be stable or unstable. An equilibrium is stable when, after a small disturbance, the preference returns to the equilibrium. An equilibrium is unstable when, after a small disturbance, the preference moves away from the equilibrium. 
 
-If we take the example of the athlete, a stable equilibrium represents a coorination preference that is maintained despite small disturbances (fatigue, brief loss of focus, etc.). An unstable equilibrium corresponds for the athlete as a state of hesitation between the two patterns. This hesitation will make the athlete switch to one of the two patterns after a small disturbance.
+If we take the example of the athlete, a stable equilibrium represents a coordination preference that is maintained despite small disturbances (fatigue, brief loss of focus, etc.). An unstable equilibrium corresponds to a state of hesitation between the two patterns. This hesitation will make the athlete switch to one of the two patterns after a small disturbance.
 
 Later in our work, equilibria will be identified and their stability will be determined. In Section 3, we will study the model without an instruction ($I=0$). In Section 5, the model with a positive instruction ($I>0$) will be examined.
 
@@ -109,10 +108,22 @@ TO WRITE:
      the equilibria and study their stability.
    - Do not calculate the equilibria here.
 -->
-
 ## Scope and assumptions
 
+The model used is simplified. Indeed, only one variable is used to describe the coordination preference. Moreover, it considers only two abstract movement patterns, not specific movements such as walking or running.
 
+This model relies on the following assumptions: 
+
+- The parameters $a$ and $b$ stay constant.
+
+- The instruction $I$ stays constant during each simulation.
+
+- The model uses values from the assignment,
+     not measurements from real athletes.
+
+This model can help us understand which coordination preferences can be stable, how an instruction can change these preferences and how they change over time. However, with this model, we do not know the exact movement performed by an athlete and how a real athlete would respond to an instruction. 
+
+In the next section, we will first study the model without any instruction ($I=0$). This will enable us to understand which preferences are stable before changing the instruction.
 
 <!--
 TO WRITE:
