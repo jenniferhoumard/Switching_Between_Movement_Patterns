@@ -27,11 +27,17 @@ It is a linear term. Since $a$ is positive, $ax$ and $x$ have the same sign. Hen
 
 **$-bx^{3}$ term**
 
-It is a cubic term. Since $b$ is positive, $-bx^{3}$ and $x$ have opposite signs. Hence, it attenuates the preference. If $x<0$, $-bx^{3}$ will be positive, so the preference for pattern A will be weakened. On the contrary, if $x>0$, $-bx^{3}$ will be negative, so the preference for pattern B will be weakened. In both cases, the preference is pushed towards zero.
+It is a cubic term. Since $b$ is positive, $-bx^{3}$ and $x$ have opposite signs. Hence, it attenuates the preference. If $x<0$, $-bx^{3}$ will be positive, so the preference for pattern A will be weakened. On the contrary, if $x>0$, $-bx^{3}$ will be negative, so the preference for pattern B will be weakened. In both cases, the preference is pushed towards zero. Without this term, the preference would grow indefinitely. The cubic term prevents this from happening.
 
 **$I$ term**
 
-$I$ is a constant. When $I$ is positive, it favours pattern B. When $I$ is negative, it favours pattern A. I is an external component, that is to say, it is not influenced by the preference $x$. It can be interpreted as an instruction given to the athlete, for example from a coach.
+$I$ is a constant. When $I$ is positive, it favours pattern B. When $I$ is negative, it favours pattern A. $I$ is an external component, that is to say, it is not influenced by the preference $x$. It can be interpreted as an instruction given to the athlete, for example from a coach.
+
+**Clarification**
+
+All these terms act together to determine how the preference evolves. Depending on their combined effect, the preference increases ($\dot{x} > 0$), decreases ($\dot{x} < 0$) or remains constant ($\dot{x} = 0$).
+
+It is important to not confuse the variables with physical quantities. $x$ does not represent the position of a body part, and $I$ does not represent the intensity of an exercise. The model uses scaled values without physical units. The preference $x$ is not limited to values between $-1$ and $1$.
 
 <!--
 TO WRITE:
@@ -72,7 +78,7 @@ TO WRITE:
 -->
 ## Meaning of an equilibrium
 
-An equilibrium is a value of $x$ where the preference stops changing. This happens when $\dot{x} = 0$. The athlete's preference does not change, it remains constant. It does not mean that the athlete stops moving. It does not mean that the athlete has no preference. It means that the athlete prefer a pattern and at an equilibrium, the preference does not change anymore.
+An equilibrium is a value of $x$ where the preference stops changing. This happens when $\dot{x} = 0$. The athlete's preference does not change, it remains constant. It does not mean that the athlete stops moving. It does not necessarily mean that the athlete has no preference;it only means that the preference, whatever it is, stays the same.
 
 The equilibria can be stable or unstable. An equilibrium is stable when, after a small disturbance, the preference returns to the equilibrium. An equilibrium is unstable when, after a small disturbance, the preference moves away from the equilibrium. 
 
