@@ -23,6 +23,7 @@ execute:
 
 format:
   pdf:
+    geometry: margin=1.5cm
     pdf-engine: xelatex
     documentclass: article
     toc: true
