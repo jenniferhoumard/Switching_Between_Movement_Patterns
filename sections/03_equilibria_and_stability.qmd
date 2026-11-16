@@ -13,6 +13,16 @@ an explanation of stability.
 The page length includes text, figures, and tables.
 It is a guide, not a strict requirement.
 -->
+```{python}
+#| include: false
+def f(x, I):                                   # rate of change of the model: dx/dt = ax - bx^3 + I
+    return 1.2*x - 0.8*x**3 + I                # a = 1.2, b = 0.8, I = instruction
+
+def equilibrium_points(I):                     # finds the values of x where f(x) = 0
+    r = np.roots([-0.8, 0, 1.2, I])            # roots of -0.8x^3 + 0x^2 + 1.2x + I (coefficients from x^3 to constant)
+    return np.sort(r[np.isclose(r.imag, 0)].real)  # keeps only the real roots, sorted from smallest to largest
+```
+
 
 ## Graphical equilibrium analysis at $I=0$
 
@@ -49,6 +59,52 @@ TO WRITE:
    - We now need to determine which equilibria
      are stable and which are unstable.
 -->
+
+We first study the model without any external instruction, so that neither pattern is favoured from the outside. With $I = 0$, $a = 1.2$ and $b = 0.8$, the model becomes:
+
+$$
+\frac{dx}{dt} = f(x) = 1.2x - 0.8x^3 .
+$$
+
+Our aim is to find the values of $x$ at which the coordination preference stops changing, that is, the values for which $dx/dt = 0$.
+
+@fig-baseline-vector shows $f(x)$ for $x$ between $-2$ and $2$. The horizontal axis represents the coordination preference $x$, and the vertical axis represents its rate of change $dx/dt$. When the curve is above the horizontal axis, the preference is increasing; when it is below, the preference is decreasing.
+
+
+```{python}
+#| label: fig-baseline-vector
+#| fig-cap: "Rate of change $f(x) = 1.2x - 0.8x^3$ for $I = 0$. Filled points are stable equilibria and the open point is unstable. Red arrows show the direction in which the preference $x$ changes in each region."
+
+x = np.linspace(-2, 2, 400)                    # 400 values of x between -2 and 2
+eq = equilibrium_points(0.0)                   # the 3 equilibria for I = 0: -1.225, 0, +1.225
+
+# An equilibrium is stable if f > 0 just to its left and f < 0 just to its right
+stable = (f(eq - 0.01, 0.0) > 0) & (f(eq + 0.01, 0.0) < 0)  # True for stable equilibria, False for unstable
+
+fig, ax = plt.subplots(figsize=(6, 4))         # creates the figure (6 x 4 inches) and the axes
+ax.plot(x, f(x, 0.0), label="f(x) = 1.2x − 0.8x³")  # draws the curve f(x), with its name in the legend
+ax.axhline(0, color="black", lw=0.8)           # draws the horizontal line y = 0
+ax.scatter(eq[stable], np.zeros(stable.sum()), color="black", zorder=3,
+           label="Stable equilibrium")         # filled black points for stable equilibria (drawn on top of the curve)
+ax.scatter(eq[~stable], np.zeros((~stable).sum()), facecolor="white",
+           edgecolor="black", zorder=3,
+           label="Unstable equilibrium")       # open (white) point for the unstable equilibrium
+
+# One arrow in each of the four regions: right if f > 0, left if f < 0
+for xm in [-1.6, -0.6, 0.6, 1.6]:              # one test point in each of the 4 regions
+    d = np.sign(f(xm, 0.0))                    # +1 if f > 0 (x increases), -1 if f < 0 (x decreases)
+    ax.annotate("", xy=(xm + 0.25 * d, 0), xytext=(xm - 0.25 * d, 0),     # arrow pointing right if d = +1, left if d = -1
+                arrowprops=dict(arrowstyle="->", color="tab:red"))
+
+ax.set_xlabel("Coordination preference x")     # horizontal axis label
+ax.set_ylabel("Rate of change dx/dt")          # vertical axis label
+ax.legend(loc="upper right")                   # shows the legend in the top-right corner
+plt.show()                                     # displays the figure
+```
+
+The equilibria are the points where the curve crosses the horizontal axis, because at these points $dx/dt = 0$ and the preference no longer changes. @fig-baseline-vector shows three crossings, at approximately $x = -1.225$, $x = 0$ and $x = +1.225$. They are marked by the three points on the horizontal axis. The difference between filled and open points, and the red arrows, will be explained in the next subsection.
+
+Finding the equilibria is only the first step. A preference can only be maintained if nearby preferences return to it after a small change. We therefore need to determine which of these three equilibria are stable and which are unstable.
 
 ## Stability from the sign of the rate of change
 
@@ -97,6 +153,21 @@ TO WRITE:
    - Leave the movement interpretation for
      the next subheading.
 -->
+
+To determine stability, we look at the sign of $f(x)$ on either side of each equilibrium. When $f(x) > 0$, the preference increases and $x$ moves to the right. When $f(x) < 0$, the preference decreases and $x$ moves to the left. These directions tell us how $x$ changes around each equilibrium, and they are shown by the red arrows in @fig-baseline-vector.
+
+The three equilibria divide the horizontal axis into four regions:
+
+- For $x < -1.225$, $f(x) > 0$, so $x$ moves to the right, towards $-1.225$.
+- Between $-1.225$ and $0$, $f(x) < 0$, so $x$ moves to the left, towards $-1.225$ and away from $0$.
+- Between $0$ and $+1.225$, $f(x) > 0$, so $x$ moves to the right, towards $+1.225$ and away from $0$.
+- For $x > +1.225$, $f(x) < 0$, so $x$ moves to the left, towards $+1.225$.
+
+An equilibrium is stable when the arrows on both sides point towards it. This is the case for $x = -1.225$. We can see that a preference slightly below it increases, and a preference slightly above it decreases, so in both cases $x$ returns to $-1.225$. The same reasoning applies to $x = +1.225$. Nearby preferences therefore move towards these two points.
+
+An equilibrium is unstable when the arrows on both sides point away from it. This is the case for $x = 0$. There, we can see that after a small positive change, $f(x)$ becomes positive and $x$ keeps increasing; after a small negative change, $f(x)$ becomes negative and $x$ keeps decreasing. A small change away from zero is therefore amplified instead of corrected, and the preference moves further away.
+
+In summary, when $I = 0$ the model has three equilibria: two stable equilibria at $x \approx -1.225$ and $x \approx +1.225$, and one unstable equilibrium at $x = 0$. The sign of $f(x)$ shown in @fig-baseline-vector is enough to establish these results, without solving the equation exactly.
 
 ## Interpretation: two possible attractors
 
@@ -173,3 +244,11 @@ CODE GUIDE
 
 All libraries are already loaded in the master QMD.
 -->
+
+These results can now be interpreted in terms of movement coordination. When $I = 0$, the model has two stable coordination preferences. The negative stable equilibrium ($x \approx -1.225$) represents a stable preference for Pattern A, and the positive stable equilibrium ($x \approx +1.225$) represents a stable preference for Pattern B. Because no instruction is given ($I = 0$), neither pattern is favoured from outside the system, and the two stable states are at the same distance from zero.
+
+An attractor is a stable state towards which nearby values move over time. The two stable equilibria therefore act as the two attractors of this model. This idea is central to the study of movement coordination. As described by @haken1985, stable coordination patterns between moving limbs act as attractors of a simple dynamical system. Kelso and Schöner further described stable coordination patterns as states that emerge from the dynamics of the system and resist small perturbations [@kelso1988]. In our model, the unstable equilibrium at $x = 0$ plays the opposite role: it separates the two attractors, so that each side of zero leads to a different stable state.
+
+As a consequence, the starting preference determines which stable state is reached. According to the model, an athlete who starts with a negative preference tends towards the stable state for Pattern A, while an athlete who starts with a positive preference tends towards the stable state for Pattern B. These are predictions of the mathematical model, not measurements from real athletes.
+
+In this section, the stable states were identified from the graph of $f(x)$ only. In Section 4, we use Python simulations to see how the preference changes over time, and we check whether the simulated trajectories approach the stable equilibria found here.
