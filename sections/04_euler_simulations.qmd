@@ -19,6 +19,33 @@ It is a guide, not a strict requirement.
 
 ## Explicit Euler method
 
+In the last session, we showed which equilibria are stable or unstable when $I=0$. Now, we want to see how the coordination preference $x$ changes over time. To do so, we will use the explicit Euler method.
+
+The explicit Euler method is a numerical technique that calculates how $x$ changes by taking small steps forward in time. The formula for the Euler method is:
+
+$$
+x_{n+1} = x_n + h \, f(x_n)
+$$
+
+where $x_n$ is the current preference, $x_{n+1}$ is the preference at the next step, $h$ is the size of the time step, and $f(x_n)$ is the rate of change (speed) at the current step. We say that it is an explicit method because we already know the right part of the equation. Indeed, we calculate the next speed ($x_{n+1}$) based on the current speed ($x_n$) , so this method is direct. When applying this method to our model, we get:
+
+$$
+x_{n+1} = x_n + h \left( 1.2\,x_n - 0.8\,x_n^{3} + I \right)
+$$
+
+The simulation settings are taken from the assignment [@course2026] and are summarized in Table @tbl-settings. The only difference between the two simulations is the starting value.
+
+| Parameter | Value |
+|---|---|
+| Instruction | $I = 0$ |
+| Time step | $h = 0.01$ |
+| Simulation time | $t \in [0, 20]$ |
+| Initial preferences | $x(0) = -1.8$ and $x(0) = +1.8$ |
+
+: Simulation settings [@course2026]. {#tbl-settings}
+
+Not random values!!!
+
 <!--
 TO WRITE:
 
