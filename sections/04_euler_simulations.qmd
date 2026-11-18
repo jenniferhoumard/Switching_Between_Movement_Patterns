@@ -27,7 +27,7 @@ $$
 x_{n+1} = x_n + h \, f(x_n)
 $$
 
-where $x_n$ is the current preference, $x_{n+1}$ is the preference at the next step, $h$ is the size of the time step, and $f(x_n)$ is the rate of change (speed) at the current step. It is an explicit method because the right-hand side of the equation is already known. Indeed, we calculate the next preference ($x_{n+1}$) based on the current preference ($x_n$), so this method is direct. When applying this method to our model, we get:
+where $x_n$ is the current preference, $x_{n+1}$ is the preference at the next step, $h$ is the size of the time step, and $f(x_n)$ is the rate of change (speed) at the current step:  $f(x_n)$ is the value of $\dot{x}$ at step $n$. It is an explicit method because the right-hand side of the equation is already known. Indeed, we calculate the next preference ($x_{n+1}$) based on the current preference ($x_n$), so this method is direct. When applying this method to our model, we get:
 
 $$
 x_{n+1} = x_n + h \left( 1.2\,x_n - 0.8\,x_n^{3} + I \right)
@@ -42,7 +42,7 @@ The simulation settings are taken from the assignment [@course2026] and are summ
 | Simulation time | $t \in [0, 20]$ |
 | Initial preferences | $x(0) = -1.8$ and $x(0) = +1.8$ |
 
-: Simulation settings [@course2026]. {#tbl-settings}
+: Simulation settings. {#tbl-settings}
 
 These starting values are not chosen randomly. One lies on the Pattern A side and the other on the Pattern B side of the unstable equilibrium at $x = 0$. This allows us to check whether the two simulations reach different stable equilibria, as predicted by the stability analysis in Section 3.
 
@@ -185,11 +185,11 @@ plt.show()                                     # displays the figure
 
 @fig-baseline-trajectories shows how the coordination preference changes over time for two different starting values. The horizontal axis shows the time $t$ and the vertical axis shows the coordination preference $x$. The blue line shows the simulation starting from $x(0) = -1.8$, while the orange line shows the simulation starting from $x(0) = +1.8$. The dashed black lines show the two stable equilibria, while the grey line shows the unstable equilibrium.
 
- We can see that the two trajectories behave in opposite but symmetrical ways. For both, the preference evolves quickly at first, but then slows down as it approaches a stable equilibrium. When starting at $x(0) = -1.8$, the preference increases and then becomes constant. When starting at $x(0) = +1.8$, the preference decreases and becomes constant. Both trajectories become constant after $t \approx 1.5$.
+We can see that the two trajectories behave in opposite but symmetrical ways. For both, the preference evolves quickly at first, but then slows down as it approaches a stable equilibrium. When starting at $x(0) = -1.8$, the preference increases and then becomes constant. When starting at $x(0) = +1.8$, the preference decreases and becomes constant. Both trajectories are practically constant (within $0.01$ of the equilibrium) after $t \approx 1.5$.
 
 The two simulations reach different final preferences: approximately $-1.225$ for the negative starting value and approximately $+1.225$ for the positive starting value. These final values are consistent with the two stable equilibria identified in Section 3 (@fig-baseline-vector). Furthermore, neither of the trajectories crosses $x=0$. The simulations are therefore consistent with the stability analysis.
 
-In terms of movement coordination, the two stable equilibria act as attractors. Indeed, the athlete starting at $x(0) = -1.8$ settles into a stable preference for Pattern A, while the athlete starting at $x(0) = +1.8$ settles into a stable preference for Pattern B. While their preferences become less extreme over time, they do not switch to the other pattern. Consequently, without any instruction, the starting preference determines which stable state is reached.
+In terms of movement coordination, as predicted in Section 3, each trajectory is attracted to the stable state on its side of zero: Pattern A for x(0) = −1.8 and Pattern B for x(0) = +1.8. While their preferences become less extreme over time, they do not switch to the other pattern. Consequently, without any instruction, the starting preference determines which stable state is reached.
 
 <!--
 TO WRITE:
@@ -233,9 +233,9 @@ TO WRITE:
 
 ## Numerical implementation check
 
-In this part, we will check the numerical implementation. First, we verify that the number of Euler steps is correct. The simulation runs from $t = 0$ to $t = 20$, with a step size of $h = 0.01$. This means that there should be $20 / 0.01 = 2000$ steps. Including the starting point, there should be 2001 time values. This was confirmed in Python with `len(t)`, which returns 2001.
+In this part, we will check the numerical implementation. First, we verify that the number of Euler steps is correct. The simulation runs from $t = 0$ to $t = 20$, with a step size of $h = 0.01$. This means that there should be $20 / 0.01 = 2000$ steps. Including the starting point, there should be 2001 time values. This was confirmed in Python with `len(t)`, which returns `{python} len(t)`.
 
-We then check the final values of both simulations. The simulation starting from $x(0) = -1.8$ ends at $x(20) \approx -1.2247$, and the simulation starting from $x(0) = +1.8$ ends at $x(20) \approx +1.2247$. These values match the stable equilibria found in Section 3. 
+We then check the final values of both simulations. The simulation starting from $x(0) = -1.8$ ends at $x(20) \approx$ `{python} float(round(x_A[-1], 4))`, and the simulation starting from $x(0) = +1.8$ ends at $x(20) \approx$ `{python} float(round(x_B[-1], 4))`.
 
 These checks are useful to confirm that the simulation uses the correct settings and that the numerical results agree with the graphical analysis from Section 3.
 
