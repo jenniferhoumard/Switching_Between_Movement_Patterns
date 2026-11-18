@@ -136,6 +136,62 @@ No extra imports or custom functions are needed.
 
 ## Long-term behaviour
 
+@fig-baseline-trajectories shows how the coordination preference changes over time for two different starting values. We can see that they act in opposite but symmetrical ways. For both, the preference evolves quickly at first, but then slows down as it approaches a stable equilibrium. When starting at $x(0) = -1.8$, the preference increases and then become constant. When starting at $x(0) = +1.8$, the preference decreases and becomes constant. Both trajectories are constant at approximately $1.5$.
+
+The two simulations reach different final preferences: approximately $-1.225$ for the negative starting value and approximately $+1.225$ for the positive starting value. These final values are consistant with the two stable equilibria indentified in the former session. Furthermore, neither of the trajectories crosses $x=0$. Consequently, it is consistant with the stability analysis.
+
+In term of movement coordination, the athlete starting with a negative preference moves towards the stable state for Pattern A, while the athlete starting with a positive preference moves towards the stable state for Pattern B. This shows that the initial preference affects which stable state is reached.
+```{python}
+import numpy as np                            
+import matplotlib.pyplot as plt 
+
+def f(x, I):                                   # rate of change of the model: dx/dt = ax - bx^3 + I
+    return 1.2*x - 0.8*x**3 + I                # a = 1.2, b = 0.8, I = instruction
+
+def equilibrium_points(I):                     # finds the values of x where f(x) = 0
+    r = np.roots([-0.8, 0, 1.2, I])            # roots of -0.8x^3 + 0x^2 + 1.2x + I (coefficients from x^3 to constant)
+    return np.sort(r[np.isclose(r.imag, 0)].real)  # keeps only the real roots, sorted from smallest to largest
+```
+
+```{python}
+I = 0.0                                        # no external instruction
+h = 0.01                                       # time step (called dt in Lab 2)
+t0, t_end = 0.0, 20.0                          # start and end of the simulation
+n_steps = int(round((t_end - t0) / h))         # number of Euler steps: 20 / 0.01 = 2000 (same as Lab 2)
+
+t = np.linspace(t0, t_end, n_steps + 1)        # 2001 time values: 0, 0.01, 0.02, ..., 20 (the +1 is the starting point)
+
+x_A = np.zeros(n_steps + 1)                    # preference over time, starting on the Pattern A side
+x_B = np.zeros(n_steps + 1)                    # preference over time, starting on the Pattern B side
+x_A[0] = -1.8                                  # initial condition x(0) = -1.8
+x_B[0] = 1.8                                   # initial condition x(0) = +1.8
+```
+
+```{python}
+for n in range(n_steps):                       # repeat for each of the 2000 time steps
+    x_A[n + 1] = x_A[n] + h * f(x_A[n], I)     # new value = old value + step size * rate of change at the old value
+    x_B[n + 1] = x_B[n] + h * f(x_B[n], I)     # same Euler update for the second starting value
+```
+
+```{python}
+eq = equilibrium_points(I)                     # the 3 equilibria for I = 0: -1.225, 0, +1.225
+stable = (f(eq - 0.01, I) > 0) & (f(eq + 0.01, I) < 0)  # True for stable equilibria (same test as Section 3)
+
+fig, ax = plt.subplots(figsize=(6, 4))         # creates the figure (6 x 4 inches) and the axes
+ax.plot(t, x_A, color="tab:blue", label="x(0) = -1.8")   # trajectory starting on the Pattern A side
+ax.plot(t, x_B, color="tab:orange", label="x(0) = +1.8") # trajectory starting on the Pattern B side
+for e in eq[stable]:                           # one dashed line per stable equilibrium
+    ax.axhline(e, color="black", lw=0.8, ls="--")          # horizontal reference line at the stable equilibrium
+ax.axhline(0, color="grey", lw=0.8)            # horizontal line x = 0 (unstable equilibrium, no preference)
+
+ax.set_xlabel("Time t")                        # horizontal axis label
+ax.set_ylabel("Coordination preference x")     # vertical axis label (same wording as Section 3)
+ax.set_xlim(t0, t_end)                         # shows the whole simulation, from t = 0 to t = 20
+ax.legend(loc="center right")                  # legend placed where it does not hide the curves
+plt.show()                                     # displays the figure
+```
+
+
 <!--
 TO WRITE:
 
@@ -177,6 +233,8 @@ TO WRITE:
 -->
 
 ## Numerical implementation check
+
+
 
 <!--
 TO WRITE:
