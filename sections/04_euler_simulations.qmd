@@ -234,7 +234,22 @@ TO WRITE:
 
 ## Numerical implementation check
 
+In this part, we will check the numerical implentation. First, we verify that the number of Euler steps is correct. The simulation runs from 0 to 20, with a step size of $h = 0.01$. This means that there should be $20 / 0.01 = 2000$ steps. Including the starting point, there should be 2001 time values.
 
+We then check the final values of both simulations. The simulation starting from $x(0) = -1.8$ ends at $x(20) \approx -1.2247$, and the simulation starting from $x(0) = +1.8$ ends at $x(20) \approx +1.2247$. These values match what we expected from the former section. 
+
+These checks are useful to confirm that the simulation uses the correct settings and that the numerical results agree with the mathematical analysis.
+
+In the next section, we will repeat this anlysis but with an external instruction of $I = 0.70$. We will compare how the stable preferences and simulation results change with this new condition.
+
+```{python}
+print("Number of time values:", len(t))        # should be 2001 (2000 steps + the starting point)
+print("Number of Euler steps:", len(t) - 1)    # should be 2000 = 20 / 0.01
+print("Last time value:", t[-1])               # should be 20.0
+print("Final value from x(0) = -1.8:", round(x_A[-1], 4))   # should be close to -1.225
+print("Final value from x(0) = +1.8:", round(x_B[-1], 4))   # should be close to +1.225
+print("Stable equilibria (Section 3):", np.round(eq[stable], 4))  # values to compare with
+```
 
 <!--
 TO WRITE:
