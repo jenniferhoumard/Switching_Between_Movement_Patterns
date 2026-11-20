@@ -137,8 +137,7 @@ print (eq_values) # only one real equilibrium is calculated
 The red arrows indicate the equilibrium is stable. To the left, $f(x)>0$, so the preference $x$ increases towards equilibrium. To the right, $f(x)<0$, so the preference $x$ decreases towards it. Unlike the case $I=0$, there is no longer a stable equilibroum favouring Pattern A. 
 
 
-## Simulations with the positive instruction
-
+## Euler simulations with the positive instruction
 <!--
 TO WRITE:
 
@@ -198,6 +197,50 @@ CODE GUIDE — Similar to Section 4.
    - Both lines should end near the same
      positive equilibrium.
 -->
+We repeat the Euler simulations from Section 4, but now with $I = 0.70$. The time step ($h=0.01$), simulation time ($t=0$ to $20$), and initial preferences ($x(0)=-1.8$ and $x(0)=+1.8$) remain the same. We use the same function `f(x, I)` and Euler formula as in Section 4. 
+
+```{python}
+# 1. Prepare the arrays using the time values from Section 4
+x_A_values = np.zeros(n_steps + 1) # create empty array for starting value -1.8
+x_B_values = np.zeros(n_steps + 1) # create empty array for starting value +1.8
+x_A_values[0] = -1.8 # define the first value for the first array
+x_B_values[0] = +1.8 # define the first value for the second array
+
+# 2. Apply the Euler method for I = 0.70
+for n in range(n_steps): # run the loop 2000 times 
+  x_A_values[n + 1] = x_A_values[n] + h * f(x_A_values[n], I_pos)
+  x_B_values[n + 1] = x_B_values[n] + h * f(x_B_values[n], I_pos)
+
+# 3. Display the results
+print("Final preference from -1.8:", round(x_A_values[-1], 4))
+print("Final preference from +1.8:", round(x_B_values[-1], 4))
+```
+
+```{python}
+# 4. Plot both trajectories and the equilibrium
+fig, ax = plt.subplots(figsize=(6, 4)) # create a figure and axis
+
+ax.plot(t, x_A_values, color = "tab:blue", label = "x(0) = -1.8")
+ax.plot(t, x_B_values, color = "tab:orange", label = "x(0) = +1.8")
+
+ax.axhline(eq_values[0], color="black", lw=0.8, ls = "--") # add horizontal line at the equilibrium
+ax.axhline(0, color="grey", lw=0.8) # add horizontal line at y=0
+
+ax.scatter([t0, t0], [x_A_values[0], x_B_values[0]], color = ["tab:blue" ,"tab:orange"], zorder=3, clip_on=False) # add points for the starting values
+
+# 5. Set the y-ticks to show the starting values and the equilibrium
+ticks = [x_A_values[0], 0, eq_values[0], x_B_values[0]] # define the y-ticks to show the starting values and the equilibrium
+ax.set_yticks(ticks) # set the y-ticks to the defined values
+
+# 6. Add labels and legend
+ax.set_xlabel("Time (t) dimensionless")
+ax.set_ylabel("Coordination preference (x)")
+ax.set_xlim(t0, t_end)
+ax.legend(loc="lower right")
+plt.show()
+```
+
+As show in @fig-cue-trajectories, both trajectories approach the same psoitive equilibrium, $x\approx+1.450$. The preference starting at $+1.8$ decreases directly towards it. The preference starting at $-1.8$ first increases while still favouring Pattern A, then crosses $x=0$ at about $t=5.24$ and moves towards Pattern B. By $t=20$, both preferences are approximately $+1.450$. These results agree with graphical analysis. With $I=0.70$, both starting preferences approach the same stable equilibrium, even though they initially favour different patterns.  
 
 ## Comparing both instruction conditions
 
@@ -253,3 +296,4 @@ CODE GUIDE — Comparison plot.
 5. Use clear labels so the two conditions
    can be compared easily.
 -->
+
