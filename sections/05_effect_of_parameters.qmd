@@ -297,3 +297,8 @@ CODE GUIDE — Comparison plot.
    can be compared easily.
 -->
 
+![Comparison of two instruction conditions ($I=0$ and $I=0.70$)](figures/model_comparison.png){#fig-compare-models width=50%}
+
+
+As shown in @fig-comapre-models, the positive instruction changes the number of stable equilibria from two to one. Without an instruction, the two starting preferences approach different stable equilibria. When $I=0$, the model has two stable states: one favouring Pattern A and one favouring Pattern B, separated by an unstable equilibrium at ($x=0$). With a positive instuction $I=0.70$, the stable equilibrium favouring Pattern A disappears, and ($x=0$) is no longer an equilibrium. Both starting preferences then approach the same stable equilibrium favouring Pattern B. The positive instruction therefore changes which stable preferences are possible in this model, allowing a preference that initially favours Pattern A to switch to Pattern B.
+
