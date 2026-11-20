@@ -46,8 +46,6 @@ format:
 jupyter: python3
 ---
 
-
-
 ```{=latex} 
 \clearpage
 ```
@@ -81,10 +79,6 @@ import matplotlib.pyplot as plt
 
 {{< include sections/05_effect_of_parameters.qmd >}}
 
-# Discussion and Conclusion
-
-{{< include sections/06_discussion_and_conclusion.qmd >}}
-
 ```{=latex} 
 \clearpage
 ```
@@ -97,7 +91,6 @@ import matplotlib.pyplot as plt
 ```{=latex}
 \clearpage
 ```
+# Appendix {.unnumbered}
 
-# Appendix A {.unnumbered}
-
-{{< include sections/07_appendix.qmd >}}
+{{< include sections/06_appendix.qmd >}}

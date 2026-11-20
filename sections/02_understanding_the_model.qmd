@@ -17,24 +17,18 @@ $$
 \dot{x} = f(x) = a\,x - b\,x^{3} + I, \qquad a = 1.2,\; b = 0.8
 $$
 
-Here, $\dot{x}$ indicates at what speed (rate of change) the preference $x$ changes over time (derivative of $x$ with respect to time).
+Here, $\dot{x}$ indicates at what speed (rate of change) the preference $x$ changes over time (derivative of $x$ with respect to time). The state variable $x$ represents the preference for a movement pattern. We can interpret the values of $x$ thanks to its sign. When $x<0$, the athlete favours pattern A. When $x>0$, the athlete favours pattern B. When $x=0$, the athlete does not favour either pattern. The magnitude of $x$ indicates how strong the preference is. Values close to zero indicate a weak preference, while larger values correspond to a strong preference.
 
-The state variable $x$ represents the preference for a movement pattern. We can interpret the values of $x$ thanks to its sign. When $x<0$, the athlete favours pattern A. When $x>0$, the athlete favours pattern B. When $x=0$, the athlete does not favour either pattern. The magnitude of $x$ indicates how strong the preference is. Values close to zero indicate a weak preference, while larger values correspond to a strong preference.
-
-**$ax$ term**
-
+**1. $ax$ term**
 It is a linear term. Since $a$ is positive, $ax$ and $x$ have the same sign. Hence, $ax$ amplifies the preference. If $x<0$, $ax$ will be negative as well, so the preference for pattern A will be reinforced. On the contrary, if $x>0$, $ax$ will be positive, so the preference for pattern B will be reinforced. In both cases, the preference is pushed away from zero.
 
-**$-bx^{3}$ term**
-
+**2. $-bx^{3}$ term**
 It is a cubic term. Since $b$ is positive, $-bx^{3}$ and $x$ have opposite signs. Hence, it attenuates the preference. If $x<0$, $-bx^{3}$ will be positive, so the preference for pattern A will be weakened. On the contrary, if $x>0$, $-bx^{3}$ will be negative, so the preference for pattern B will be weakened. In both cases, the preference is pushed towards zero. Without this term, the preference would grow indefinitely. The cubic term prevents this from happening, as it becomes stronger than the linear term $|ax|$.
 
-**$I$ term**
-
+**3. $I$ term**
 $I$ is a constant. When $I$ is positive, it favours pattern B. When $I$ is negative, it favours pattern A. $I$ is an external component, that is to say, it is not influenced by the preference $x$. It can be interpreted as an instruction given to the athlete, for example from a coach. This instruction could be about the timing or the direction of the movement. The coach can give the same instruction whether the athlete prefers pattern A or pattern B (i.e $I$ is external to $x$). In this model, $I$ remains constant during each simulation so we can study how the coordination preference changes under a given instruction. However, we can change its value between simulations to compare the effects of different instructions.
 
-**Combined effect**
-
+**4. Combined effect**
 All these terms act together to determine how the preference evolves. Depending on their combined effect, the preference increases ($\dot{x} > 0$), decreases ($\dot{x} < 0$) or remains constant ($\dot{x} = 0$).
 
 
@@ -77,11 +71,7 @@ TO WRITE:
 -->
 ## Meaning of an equilibrium
 
-An equilibrium is a value of $x$ where the preference stops changing. This happens when $\dot{x} = 0$. The athlete's preference does not change, it remains constant. It does not mean that the athlete stops moving. It does not necessarily mean that the athlete has no preference;it only means that the preference, whatever it is, stays the same.
-
-The equilibria can be stable or unstable. An equilibrium is stable when, after a small disturbance, the preference returns to the equilibrium. An equilibrium is unstable when, after a small disturbance, the preference moves away from the equilibrium. 
-
-For an athlete, a stable equilibrium represents a coordination preference that tends to be restored after a small disturbance, such as a brief loss of focus or a slight change in movement timing. In contrast, at an unstable equilibrium, a small disturbance causes the preference to move further away from that equilibrium rather than return to it.
+An equilibrium is a value of $x$ where the preference stops changing. This happens when $\dot{x} = 0$. The athlete's preference does not change, it remains constant. It does not mean that the athlete stops moving. It does not necessarily mean that the athlete has no preference;it only means that the preference, whatever it is, stays the same. The equilibria can be stable or unstable. An equilibrium is stable when, after a small disturbance, the preference returns to the equilibrium. An equilibrium is unstable when, after a small disturbance, the preference moves away from the equilibrium. For an athlete, a stable equilibrium represents a coordination preference that tends to be restored after a small disturbance, such as a brief loss of focus or a slight change in movement timing. In contrast, at an unstable equilibrium, a small disturbance causes the preference to move further away from that equilibrium rather than return to it.
 
 
 <!--
@@ -121,12 +111,9 @@ This model relies on the following assumptions:
 
 - The instruction $I$ stays constant during each simulation.
 
-- The model uses values from the assignment,
-     not measurements from real athletes. These values have no physical units.
+- The model uses values from the assignment, not measurements from real athletes. These values have no physical units.
 
-This model can help us understand which coordination preferences can be stable, how an instruction can change these preferences and how they change over time. However, with this model, we do not know the exact movement performed by an athlete and how a real athlete would respond to an instruction. 
-
-In the next section, we will first study the model without any instruction ($I=0$). This will enable us to understand which preferences are stable before changing the instruction.
+This model can help us understand which coordination preferences can be stable, how an instruction can change these preferences and how they change over time. However, with this model, we do not know the exact movement performed by an athlete and how a real athlete would respond to an instruction. In the next section, we will first study the model without any instruction ($I=0$). This will enable us to understand which preferences are stable before changing the instruction.
 
 <!--
 TO WRITE:
