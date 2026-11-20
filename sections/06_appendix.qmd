@@ -11,7 +11,7 @@ The appendix is not included in the
 10-page limit of the main report.
 -->
 
-## Additional numerical checks
+## Code
 
 <!--
 TO INCLUDE:

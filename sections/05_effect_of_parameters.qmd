@@ -362,7 +362,8 @@ ax.set_xlim(-2.1, 2.1)
 
 plt.show()
 ```
+## Limitations of the model
 
-
+One limitation is that the model does not account for natural variability in an athlete's coordination. Even when repeating the same movement, an athlete may show small changes in movement timing and muscle activation due to fatigue or sensory feedback. For $I=0$, a preference starting at $x=-1.8$ always approaches the stable equilibrium at $x\approx-1.225$ and never switches to Pattern B. However, if a sufficiently large disturbance (e.g., muscle fatigue or enviornmental change) moved the preference beyond the unstable equilbrium at $x=0$, it could cause the preference to move towards the stable equilibrium favouring Pattern B, even without an external instruction. Therefore, the model cannnot predict switches caused by natural coordination variability. 
 
 
