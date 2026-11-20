@@ -88,6 +88,55 @@ CODE GUIDE — Similar to Section 3.
 The libraries np and plt are already imported in the master QMD. Run the code cell in the master QMD.
 -->
 
+In Sections 3 and 4, we studied the model without an external instruction ($I = 0$). In this section, we will explore how the preference behaves with a positive instruction ($I = 0.70$).
+
+The model becomes: 
+
+$$\boxed{\dot{x} = 1.2x - 0.8x^3 + 0.70}$$
+
+The same graphical method in Section 3.
+
+```{python}
+#|label: cue-vector
+#| fig-cap: "The rate of change for $I = 0.70$. Filled points show the real equilibrium ($x\approx+1.450$). Red arrows show the direction of change on either side." 
+
+# 1. Calculate the rate of change and equilibrium for I = 0.70
+
+I_pos =  0.70 # define the positive instruction value
+x_values = np.linspace(-2, 2, 400) # generate 400 equally spaced x values
+eq_values = equilibrium_points(I_pos)  # Use the function from Section 3 to find only the real equilibria
+
+# 2. Plot the curve and the equilibrium 
+fig, ax = plt.subplots(figsize=(6, 4)) # create a figure and axis object
+ax.plot(x_values, f(x_values, I_pos), label = "f(x) = 1.2x - 0.8x³ + 0.70") # plot the rate of change function using the x values and positive instruction defined above
+ax.axhline(0, color='black', lw=0.8, linestyle='--') # plot horizontal line at y=0 to indicate where the rate of change is zero
+ax.scatter(eq_values, np.zeros(len(eq_values)), color = 'black', label = "Stable equilibrium", zorder = 3) # plot the equilibrium point(s) on the graph
+
+# 3. Add arrows to on each side of the equilibrium to show stability
+for x_test in [1.15, 1.75]: # one test point in each of the 2 regions
+  direction = np.sign(f(x_test, I_pos)) # +1: right, -1: left
+  ax.annotate("", xy=(x_test + 0.25 * direction, 0), # 0.25 is the length of the arrow
+              xytext=(x_test - 0.25 * direction, 0),
+              arrowprops=dict(arrowstyle='->', color='red')) # add arrows to indicate the direction of change
+
+# 4. Add labels showing the sign of f(x) on each side of the equilibrium
+ax.text(0.9, 0.3, r"f(x) > 0", ha="center")
+ax.text(1.8, 0.3, r"f(x) < 0", ha="center")
+
+# 5. Add labels and legend
+ax.set_xlabel("Coordination preference (x)") 
+ax.set_ylabel(r"Rate of change $\dot{x}$") 
+ax.legend(loc="upper right")
+plt.show() 
+
+print (eq_values) # only one real equilibrium is calculated
+```
+
+@fig-cue-vector shows the rate of change for $x$ between $-2$ and $2$. The curve crosses the horizontal axis only once, at $x\approx+1.450$. This is the only real equilibrium. To determine its stability, we test one point on each side of the eqilibrium to see whether $f(x)$ is positive or negative. As mention previously, since $f(x)$ is continuous and has no other equilibria, its sign stays the same within each of the two regions ($x<1.450$ and $x>1.450$). Therefore testing one point in each region is sufficient to determine stability. 
+
+The red arrows indicate the equilibrium is stable. To the left, $f(x)>0$, so the preference $x$ increases towards equilibrium. To the right, $f(x)<0$, so the preference $x$ decreases towards it. Unlike the case $I=0$, there is no longer a stable equilibroum favouring Pattern A. 
+
+
 ## Simulations with the positive instruction
 
 <!--
