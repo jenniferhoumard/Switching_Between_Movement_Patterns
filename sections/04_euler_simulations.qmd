@@ -19,18 +19,18 @@ It is a guide, not a strict requirement.
 
 ## Explicit Euler method
 
-In Section 3, we showed which equilibria are stable or unstable when $I=0$. Now, we want to see how the coordination preference $x$ changes over time. Indeed, while the stability analysis in Section 3 tells us where the preference ends up, the simulation shows how and how fast it gets there. To do so, we will use the explicit Euler method.
+In Section 3, we used graphical analysis to identify which equilibria are stable or unstable when $I = 0$. The equation tells us how quickly the coordination preference $x$ increases or decreases at any given value of $x$. However, knowing how quickly the preference is changing at one moment does not tell us how much it will have changed later. To estimate the preference at future times, we use the explicit Euler method. Starting from a known preference, it calculates the next value using how quickly the preference is currently changing. It then repeats this calculation using the new preference. We could do these calculations by hand, but the assignment requires a simulation from $t = 0$ to $t = 20$, with a time step of $h = 0.01$. This gives $20 / 0.01 = 2000$ steps, so we use Python to perform them automatically. We can then compare the numerical results with the graphical analysis from Section 3 to check whether both methods give consistent results.
 
-The explicit Euler method is a numerical technique that calculates how $x$ changes by taking small steps forward in time. The formula for the Euler method is:
-
-$$
-x_{n+1} = x_n + h \, f(x_n)
-$$
-
-where $x_n$ is the current preference, $x_{n+1}$ is the preference at the next step, $h$ is the size of the time step, and $f(x_n)$ is the rate of change (speed) at the current step:  $f(x_n)$ is the value of $\dot{x}$ at step $n$. It is an explicit method because the right-hand side of the equation is already known. Indeed, we calculate the next preference ($x_{n+1}$) based on the current preference ($x_n$), so this method is direct. When applying this method to our model, we get:
+The formula for the Euler method is:
 
 $$
-x_{n+1} = x_n + h \left( 1.2\,x_n - 0.8\,x_n^{3} + I \right)
+\boxed{...} autour de x_{n+1} = x_n + h \, f(x_n)
+$$
+
+where $x_n$ is the current preference, $x_{n+1}$ is the preference at the next step, $h$ is the size of the time step, and $f(x_n)$ is the rate of change (speed) at the current step: $f(x_n)$ is the value of $\dot{x}$ at step $n$. The method is called explicit because the next preference, ($x_{n+1}$) is calculated directly from the current preference, ($x_n$), using values that are already known. When applying this method to our model, we get:
+
+$$
+\boxed{x_{n+1} = x_n + h \left( 1.2\,x_n - 0.8\,x_n^{3} + I \right)}
 $$
 
 The simulation settings are taken from the assignment [@course2026] and are summarized in @tbl-settings. The only difference between the two simulations is the starting value.
@@ -44,7 +44,7 @@ The simulation settings are taken from the assignment [@course2026] and are summ
 
 : Simulation settings. {#tbl-settings}
 
-These starting values are not chosen randomly. One lies on the Pattern A side and the other on the Pattern B side of the unstable equilibrium at $x = 0$. This allows us to check whether the two simulations reach different stable equilibria, as predicted by the stability analysis in Section 3.
+The given starting values are intentionally placed on opposite sides of the unstable equilibrium at $x = 0$: one favours Pattern A and the other favours Pattern B. This allows us to check whether the two simulations approach different stable equilibria, as predicted by the stability analysis in Section 3.
 
 <!--
 TO WRITE:
@@ -137,20 +137,28 @@ No extra imports or custom functions are needed.
 ## Long-term behaviour
 
 ```{python}
+# 1. Set up the simulation
+
 I = 0.0                                        # no external instruction
 h = 0.01                                       # time step (called dt in Lab 2)
 t0, t_end = 0.0, 20.0                          # start and end of the simulation
 n_steps = int(round((t_end - t0) / h))         # number of Euler steps: 20 / 0.01 = 2000 (same as Lab 2)
 
+# 2. Create the time values
+
 t = np.linspace(t0, t_end, n_steps + 1)        # 2001 time values: 0, 0.01, 0.02, ..., 20 (the +1 is the starting point)
 
-x_A = np.zeros(n_steps + 1)                    # preference over time, starting on the Pattern A side
-x_B = np.zeros(n_steps + 1)                    # preference over time, starting on the Pattern B side
+# 3. Prepare the arrays and starting values
+
+x_A = np.zeros(n_steps + 1)                    # create an array of 2001 zeros, filled later with the preference over time (Pattern A side)
+x_B = np.zeros(n_steps + 1)                    # array of 2001 zeros, filled later with the preference over time (Pattern B side)
 x_A[0] = -1.8                                  # initial condition x(0) = -1.8
 x_B[0] = 1.8                                   # initial condition x(0) = +1.8
 ```
 
 ```{python}
+# 4. Apply Euler's method
+
 for n in range(n_steps):                       # repeat for each of the 2000 time steps
     x_A[n + 1] = x_A[n] + h * f(x_A[n], I)     # new value = old value + step size * rate of change at the old value
     x_B[n + 1] = x_B[n] + h * f(x_B[n], I)     # same Euler update for the second starting value
@@ -160,21 +168,37 @@ for n in range(n_steps):                       # repeat for each of the 2000 tim
 #| label: fig-baseline-trajectories
 #| fig-cap: "Euler simulations of the preference $x(t)$ for $I = 0$ and $h = 0.01$, starting from $x(0) = -1.8$ and $x(0) = +1.8$ (dots). Dashed lines show the stable equilibria $x \\approx \\pm 1.225$ found in Section 3; the grey line shows the unstable equilibrium $x = 0$."
 
+# 5. Calculate the equilibria and determine their stability
+
+# 0.01 is a small distance used to test stability left and right of the equilibrium
+
 eq = equilibrium_points(I)                     # the 3 equilibria for I = 0: -1.225, 0, +1.225
 stable = (f(eq - 0.01, I) > 0) & (f(eq + 0.01, I) < 0)  # True for stable equilibria (same test as Section 3)
+
+# 6. Create the graph and plot both trajectories
 
 fig, ax = plt.subplots(figsize=(6, 4))         # creates the figure (6 x 4 inches) and the axes
 ax.plot(t, x_A, color="tab:blue", label="x(0) = -1.8")   # trajectory starting on the Pattern A side
 ax.plot(t, x_B, color="tab:orange", label="x(0) = +1.8") # trajectory starting on the Pattern B side
+
+# 7. Mark the starting values
+
 ax.scatter([t0, t0], [x_A[0], x_B[0]], color=["tab:blue", "tab:orange"],
            zorder=3, clip_on=False)            # dots on the starting values x(0) = -1.8 and +1.8
+
+# 8. Draw the stable and unstable equilibrium lines
+
 for e in eq[stable]:                           # one dashed line per stable equilibrium
     ax.axhline(e, color="black", lw=0.8, ls="--")          # horizontal reference line at the stable equilibrium
 ax.axhline(0, color="grey", lw=0.8)            # horizontal line x = 0 (unstable equilibrium, no preference)
 
+# 9. Set the vertical axis ticks
+
 ticks = [x_A[0], eq[0], eq[1], eq[2], x_B[0]]  # starting values and the 3 equilibria, all taken from the computed results
 ax.set_yticks(ticks)                           # places the ticks exactly at these values
 ax.set_yticklabels([str(round(float(v), 3)) for v in ticks])  # labels computed from the values, rounded to 3 decimals
+
+# 10. Add axis labels, legend, and display the graph
 
 ax.set_xlabel("Time t (dimensionless)")        # horizontal axis label (time has no unit in this model)
 ax.set_ylabel("Coordination preference x")     # vertical axis label (same wording as Section 3)
@@ -183,13 +207,21 @@ ax.legend(loc="center right")                  # legend placed where it does not
 plt.show()                                     # displays the figure
 ```
 
-@fig-baseline-trajectories shows how the coordination preference changes over time for two different starting values. The horizontal axis shows the time $t$ and the vertical axis shows the coordination preference $x$. The blue line shows the simulation starting from $x(0) = -1.8$, while the orange line shows the simulation starting from $x(0) = +1.8$. The dashed black lines show the two stable equilibria, while the grey line shows the unstable equilibrium.
+```{python}
+#| include: false
+# Numerical check
+print("Number of Euler steps:", n_steps)
+print("Final preference for Pattern A:", round(x_A[-1], 4)) # should be close to -1.225
+print("Final preference for Pattern B:", round(x_B[-1], 4)) # should be close to +1.225
+```
 
-We can see that the two trajectories behave in opposite but symmetrical ways. For both, the preference evolves quickly at first, but then slows down as it approaches a stable equilibrium. When starting at $x(0) = -1.8$, the preference increases and then becomes constant. When starting at $x(0) = +1.8$, the preference decreases and becomes constant. Both trajectories are practically constant (within $0.01$ of the equilibrium) after $t \approx 1.5$.
+@fig-baseline-trajectories shows how the coordination preference $x$ changes over time $t$ for the two starting values: $x(0) = -1.8$ (blue line) and $x(0) = +1.8$ (orange line). The dashed black lines show the two stable equilibria, while the grey line shows the unstable equilibrium $x = 0$.
 
-The two simulations reach different final preferences: approximately $-1.225$ for the negative starting value and approximately $+1.225$ for the positive starting value. These final values are consistent with the two stable equilibria identified in Section 3 (@fig-baseline-vector). Furthermore, neither of the trajectories crosses $x=0$. The simulations are therefore consistent with the stability analysis.
+We can see that the two trajectories behave in opposite but symmetrical ways. Starting from $x(0) = -1.8$, the preference increases, while starting from $x(0) = +1.8$, it decreases. In both cases, the preference evolves quickly at first, but then slows down as it approaches a stable equilibrium. Both trajectories are practically constant (within $0.01$ of the equilibrium) after $t \approx 1.5$.
 
-In terms of movement coordination, as predicted in Section 3, each trajectory is attracted to the stable state on its side of zero: Pattern A for $x(0) = −1.8$ and Pattern B for $x(0) = +1.8$. While their preferences become less extreme over time, they do not switch to the other pattern. Consequently, without any instruction, the starting preference determines which stable state is reached.
+The two simulations reach different final preferences: approximately $-1.225$ for the negative starting value and approximately $+1.225$ for the positive starting value, which are the two stable equilibria identified in Section 3 (@fig-baseline-vector). Furthermore, neither of the trajectories crosses $x=0$. The simulations are therefore consistent with the stability analysis.
+
+In terms of movement coordination, each trajectory is attracted to the stable state on its side of zero: Pattern A for $x(0) = -1.8$ and Pattern B for $x(0) = +1.8$. While their preferences become less extreme over time, they do not switch to the other pattern. Consequently, without any instruction, the starting preference determines which pattern is finally preferred. In the next section, we will repeat this analysis with an external instruction of $I = 0.70$. We will compare how the stable preferences and simulation results change with this new condition.
 
 <!--
 TO WRITE:
@@ -231,25 +263,6 @@ TO WRITE:
      not measurements from real athletes.
 -->
 
-## Numerical implementation check
-
-In this part, we will check the numerical implementation. First, we verify that the number of Euler steps is correct. The simulation runs from $t = 0$ to $t = 20$, with a step size of $h = 0.01$. This means that there should be $20 / 0.01 = 2000$ steps. Including the starting point, there should be 2001 time values. This was confirmed in Python with `len(t)`, which returns `{python} len(t)`.
-
-We then check the final values of both simulations. The simulation starting from $x(0) = -1.8$ ends at $x(20) \approx$ `{python} float(round(x_A[-1], 4))`, and the simulation starting from $x(0) = +1.8$ ends at $x(20) \approx$ `{python} float(round(x_B[-1], 4))`. These values match the stable equilibria $x \\approx {\\pm}1.225$ found in Section 3. 
-
-These checks are useful to confirm that the simulation uses the correct settings and that the numerical results agree with the graphical analysis from Section 3.
-
-In the next section, we will repeat this analysis but with an external instruction of $I = 0.70$. We will compare how the stable preferences and simulation results change with this new condition.
-
-```{python}
-#| include: false
-print("Number of time values:", len(t))        # should be 2001 (2000 steps + the starting point)
-print("Number of Euler steps:", len(t) - 1)    # should be 2000 = 20 / 0.01
-print("Last time value:", t[-1])               # should be 20.0
-print("Final value from x(0) = -1.8:", round(x_A[-1], 4))   # should be close to -1.225
-print("Final value from x(0) = +1.8:", round(x_B[-1], 4))   # should be close to +1.225
-print("Stable equilibria (Section 3):", np.round(eq[stable], 4))  # values to compare with
-```
 
 <!--
 TO WRITE:
