@@ -30,8 +30,6 @@ format:
     toc-depth: 2
     number-sections: true
     colorlinks: true
-    geometry:
-      - margin=2.2cm
     fontsize: 11pt
     code-overflow: wrap
     fig-pos: H
