@@ -88,8 +88,62 @@ CODE GUIDE — Similar to Section 3.
 The libraries np and plt are already imported in the master QMD. Run the code cell in the master QMD.
 -->
 
-## Simulations with the positive instruction
+In Sections 3 and 4, we studied the model without an external instruction ($I = 0$). In this section, we will explore how the preference behaves with a positive instruction ($I = 0.70$). We use the same graphical method as in Section 3.
 
+The model becomes: 
+$$\boxed{\dot{x} = 1.2x - 0.8x^3 + 0.70}$$
+
+```{python}
+#| label: fig-cue-vector
+#| fig-cap: 'The rate of change for $I = 0.70$. Filled points show the real equilibrium ($x\approx+1.450$). Red arrows show the direction of change on either side.'
+
+# 1. Calculate the rate of change and equilibrium for I = 0.70
+
+I_strong =  0.70 # define the positive instruction value
+x_values = np.linspace(-2, 2, 400) # generate 400 equally spaced x values
+eq_strong = equilibrium_points(I_strong)  # Use the function from Section 3 to find only the real equilibria
+
+# 2. Check the stability of the equilibrium 
+for x_eq in eq_strong: 
+  left = f(x_eq-0.01, I_strong)
+  right = f(x_eq+0.01, I_strong)
+  if left > 0 and right < 0:
+    stability = "Stable"
+  else:
+    stability = "Unstable"
+  print(round(x_eq,3), stability)
+
+# 3. Plot the curve and the equilibrium 
+fig, ax = plt.subplots(figsize=(5, 3)) # create a figure and axis object
+ax.plot(x_values, f(x_values, I_strong), label = "f(x) = 1.2x - 0.8x³ + 0.70") # plot the rate of change function using the x values and positive instruction defined above
+ax.axhline(0, color='black', lw=0.8, linestyle='--') # plot horizontal line at y=0 to indicate where the rate of change is zero
+ax.scatter(eq_strong, np.zeros(len(eq_strong)), color = 'black', label = "Stable equilibrium", zorder = 3) # plot the equilibrium point(s) on the graph
+
+# a). Add arrows to on each side of the equilibrium to show stability
+for x_test in [1.15, 1.75]: # one test point in each of the 2 regions
+  direction = np.sign(f(x_test, I_strong)) # +1: right, -1: left
+  ax.annotate("", xy=(x_test + 0.25 * direction, 0), # 0.25 is the length of the arrow
+              xytext=(x_test - 0.25 * direction, 0),
+              arrowprops=dict(arrowstyle='->', color='red')) # add arrows to indicate the direction of change
+
+# b). Add labels showing the sign of f(x) on each side of the equilibrium
+ax.text(0.9, 0.3, r"f(x) > 0", ha="center")
+ax.text(1.8, 0.3, r"f(x) < 0", ha="center")
+
+# c). Add labels and legend
+ax.set_xlabel("Coordination preference (x)") 
+ax.set_ylabel(r"Rate of change $\dot{x}$") 
+ax.legend(loc="upper right")
+ax.set_xlim(-2.1, 2.1)
+plt.show() 
+
+print (eq_strong) # only one real equilibrium is calculated
+```
+
+@fig-cue-vector shows the rate of change for $x$ between $-2$ and $2$. The curve crosses the horizontal axis only once, at $x\approx+1.450$. This is the only real equilibrium. To determine its stability, we test one point on each side of the equilibrium to see whether $f(x)$ is positive or negative. As mentioned previously, since $f(x)$ is continuous and has no other equilibria, its sign stays the same within each of the two regions ($x<1.450$ and $x>1.450$). Therefore testing one point in each region is sufficient to determine stability. The red arrows indicate the equilibrium is stable. To the left, $f(x)>0$, so the preference $x$ increases towards equilibrium. To the right, $f(x)<0$, so the preference $x$ decreases towards it. Unlike the case $I=0$, there is no longer a stable equilibrium favouring Pattern A. 
+
+
+## Euler simulations with the positive instruction
 <!--
 TO WRITE:
 
@@ -149,6 +203,54 @@ CODE GUIDE — Similar to Section 4.
    - Both lines should end near the same
      positive equilibrium.
 -->
+We repeat the Euler simulations from Section 4, but now with $I = 0.70$. The time step ($h=0.01$), simulation time ($t=0$ to $20$), and initial preferences ($x(0)=-1.8$ and $x(0)=+1.8$) remain the same. We use the same function `f(x, I)` and Euler formula as in Section 4. 
+
+```{python}
+
+# 1. Prepare the arrays using the time values from Section 4
+x_A_values = np.zeros(n_steps + 1) # create empty array for starting value -1.8
+x_B_values = np.zeros(n_steps + 1) # create empty array for starting value +1.8
+x_A_values[0] = -1.8 # define the first value for the first array
+x_B_values[0] = +1.8 # define the first value for the second array
+
+# 2. Apply the Euler method for I = 0.70
+for n in range(n_steps): # run the loop 2000 times 
+  x_A_values[n + 1] = x_A_values[n] + h * f(x_A_values[n], I_strong)
+  x_B_values[n + 1] = x_B_values[n] + h * f(x_B_values[n], I_strong)
+
+# 3. Display the results
+print("Final preference from -1.8:", round(x_A_values[-1], 4))
+print("Final preference from +1.8:", round(x_B_values[-1], 4))
+```
+
+```{python}
+#| label: fig-cue-trajectories
+#| fig-cap: 'Euler simulations for $I = 0.70$ from both starting preferences.'
+
+# 4. Plot both trajectories and the equilibrium
+fig, ax = plt.subplots(figsize=(5, 3)) # create a figure and axis
+
+ax.plot(t, x_A_values, color = "tab:blue", label = "x(0) = -1.8")
+ax.plot(t, x_B_values, color = "tab:orange", label = "x(0) = +1.8")
+
+ax.axhline(eq_strong[0], color="black", lw=0.8, ls = "--") # add horizontal line at the equilibrium
+ax.axhline(0, color="grey", lw=0.8) # add horizontal line at y=0
+
+ax.scatter([t0, t0], [x_A_values[0], x_B_values[0]], color = ["tab:blue" ,"tab:orange"], zorder=3, clip_on=False) # add points for the starting values
+
+# 5. Set the y-ticks to show the starting values and the equilibrium
+ticks = [x_A_values[0], 0, eq_strong[0], x_B_values[0]] # define the y-ticks to show the starting values and the equilibrium
+ax.set_yticks(ticks) # set the y-ticks to the defined values
+
+# 6. Add labels and legend
+ax.set_xlabel("Time (t) dimensionless")
+ax.set_ylabel("Coordination preference (x)")
+ax.set_xlim(t0, t_end)
+ax.legend(loc="lower right")
+plt.show()
+```
+
+As shown in @fig-cue-trajectories, both trajectories approach the same positive equilibrium, $x\approx+1.450$. The preference starting at $+1.8$ decreases directly towards it. The preference starting at $-1.8$ first increases while still favouring Pattern A, then crosses $x=0$ at about $t=5.24$ and moves towards Pattern B. By $t=20$, both preferences are approximately $+1.450$. These results agree with the graphical analysis. With $I=0.70$, both starting preferences approach the same stable equilibrium, even though they initially favour different patterns.
 
 ## Comparing both instruction conditions
 
@@ -204,3 +306,66 @@ CODE GUIDE — Comparison plot.
 5. Use clear labels so the two conditions
    can be compared easily.
 -->
+
+![Comparison of two instruction conditions ($I=0$ and $I=0.70$).](figures/model_comparison.png){#fig-compare-models width=65%}
+
+As shown in @fig-compare-models, the positive instruction changes the number of stable equilibria from two to one. Without an instruction, the two starting preferences approach different stable equilibria. When $I=0$, the model has two stable states: one favouring Pattern A and one favouring Pattern B, separated by an unstable equilibrium at ($x=0$). With a positive instruction $I=0.70$, the stable equilibrium favouring Pattern A and the unstable equilibrium (initially at $x=0$) have disappeared. As the instruction increases, these two equilibria move towards each other and eventually disappear. Both starting preferences then approach the same stable equilibrium favouring Pattern B. The positive instruction therefore changes which stable preferences are possible in this model, allowing a preference that initially favours Pattern A to switch to Pattern B. A negative instruction would have the opposite effect, favouring Pattern A instead. For example with $I=-0.70$, both starting preferences would approach a single stable equilibrium at $x\approx-1.450$, favouring Pattern A.
+
+## Effect of a weaker positive instruction ($I=0.40$)
+
+We also tested a weaker positive instruction ($I=0.40$) to examine whether any positive instruction causes a switch towards Pattern B. 
+
+The model becomes: 
+$$\boxed{\dot{x} = 1.2x - 0.8x^3 + 0.40}$$
+
+```{python}
+#| label: fig-instruction-strength
+#| fig-cap: 'Rate of change for two positive instruction values ($I=0.40$) and ($I=0.70$). Filled points represent stable equilibria and open points represent unstable equilibria.'
+
+# 1. Define the weaker positive instruction 
+I_weak = 0.40 
+
+# 2. Find the real equilibria for I = 0.40 using the function from Section 3
+eq_weak = equilibrium_points(I_weak)
+
+# 3. Check stability on both sides of each equilibrium
+for x_eq in eq_weak: 
+  left = f(x_eq-0.01, I_weak)
+  right = f(x_eq+0.01, I_weak)
+  if left > 0 and right < 0:
+    stability = "Stable"
+  else:
+    stability = "Unstable"
+  print(round(x_eq,3), stability)
+
+# 4. Plot both instruction conditions
+fig, ax = plt.subplots(figsize=(5, 3))
+
+ax.plot(x_values, f(x_values, I_weak), color="tab:green", label="I = 0.40") # I=0.40
+ax.plot(x_values, f(x_values, I_strong), color="tab:red", label="I = 0.70") # I=0.70
+
+# a). Mark the equilibria for I = 0.40
+ax.scatter([eq_weak[0], eq_weak[2]], [0, 0], color="tab:green", zorder=3)  # Stable equilibria
+ax.scatter(eq_weak[1], 0, facecolors="white", edgecolors="tab:green", zorder=3)  # Unstable equilibrium
+
+# b). Mark the equilibrium for I = 0.70
+ax.scatter(eq_strong[0], 0, color="tab:red", zorder=3) # Stable equilibria
+
+# c). Add the horizontal line, labels, and x-axis limits
+ax.axhline(0, color="black", lw=0.8, linestyle="--") # Horizontal line at y = 0
+
+ax.set_xlabel("Coordination preference (x)")
+ax.set_ylabel(r"Rate of change $\dot{x}$")
+ax.legend(loc="upper right")
+ax.set_xlim(-2.1, 2.1)
+
+plt.show()
+```
+
+Using the same method as before, we found three equilibria: two stable equilibria at $x=-1.000$ and $x=+1.366$, and one unstable equilibrium at $x\approx-0.366$. Unlike $I=0.70$, the stable equilibrium favouring Pattern A still exists. Therefore, a preference starting at $x=-1.8$ would approach $x=-1.000$ and remain negative. This shows that the direction of the instruction is not the only important factor. Its strength also matters. $I =0.40$ is not strong enough to cause this starting preference to switch towards Pattern B, whereas $I=0.70$ is. The python code used for the equilibrium and stability analyses, Euler simulations, and instruction comparison is provided in [Appendix C](#appendix-c). 
+
+## Limitations of the model
+
+One limitation is that the model does not account for natural variability in an athlete's coordination. Even when repeating the same movement, an athlete may show small changes in movement timing and muscle activation due to fatigue or sensory feedback. For $I=0$, a preference starting at $x=-1.8$ always approaches the stable equilibrium at $x\approx-1.225$ and never switches to Pattern B. However, if a sufficiently large disturbance (e.g., timing error or muscle fatigue) moved the preference beyond the unstable equilibrium at $x=0$, it could cause the preference to move towards the stable equilibrium favouring Pattern B, even without an external instruction. Therefore, the model cannot predict switches caused by natural coordination variability. 
+
+
