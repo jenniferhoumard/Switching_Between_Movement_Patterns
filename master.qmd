@@ -3,7 +3,7 @@
 title: "Switching Between Movement Patterns"
 subtitle: "Mathematical Modeling — IEAP Final Project, Group E"
 author:
-  - name: "Gaia Gassole"
+  - name: "Gaia Gassiole"
   - name: "Chloé Gilles"
   - name: "Jennifer Houmard"
 date: today
@@ -42,11 +42,14 @@ format:
         \usepackage{float}
         \usepackage{microtype}
         \emergencystretch=3em
+        \usepackage{tocloft}
+        \setlength{\cftbeforesecskip}{3pt}
+        \setlength{\cftbeforesubsecskip}{0pt}
+        \renewcommand{\cftsubsecfont}{\small}
+        \renewcommand{\cftsubsecpagefont}{\small}
 
 jupyter: python3
 ---
-
-
 
 ```{=latex} 
 \clearpage
@@ -81,10 +84,6 @@ import matplotlib.pyplot as plt
 
 {{< include sections/05_effect_of_parameters.qmd >}}
 
-# Discussion and Conclusion
-
-{{< include sections/06_discussion_and_conclusion.qmd >}}
-
 ```{=latex} 
 \clearpage
 ```
@@ -97,7 +96,6 @@ import matplotlib.pyplot as plt
 ```{=latex}
 \clearpage
 ```
+# Appendix {.unnumbered}
 
-# Appendix A {.unnumbered}
-
-{{< include sections/07_appendix.qmd >}}
+{{< include sections/06_appendix.qmd >}}
