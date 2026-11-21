@@ -3,7 +3,7 @@
 title: "Switching Between Movement Patterns"
 subtitle: "Mathematical Modeling — IEAP Final Project, Group E"
 author:
-  - name: "Gaia Gassole"
+  - name: "Gaia Gassiole"
   - name: "Chloé Gilles"
   - name: "Jennifer Houmard"
 date: today
