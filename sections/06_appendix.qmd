@@ -50,7 +50,7 @@ stable = (f(eq - 0.01, 0.0) > 0) & (f(eq + 0.01, 0.0) < 0)  # 0.01: small enough
 ```python
 x = np.linspace(-2, 2, 400)                    # 400 values of x between -2 and 2
 
-fig, ax = plt.subplots(figsize=(5, 3))         # creates the figure (6 x 4 inches) and the axes
+fig, ax = plt.subplots(figsize=(5, 3))         # creates the figure and the axes
 ax.plot(x, f(x, 0.0), label="f(x) = 1.2x − 0.8x³")  # draws the curve f(x), with its name in the legend
 ax.axhline(0, color="black", lw=0.8)           # draws the horizontal line y = 0
 ax.scatter(eq[stable], np.zeros(stable.sum()), color="black", zorder=3,
@@ -209,7 +209,7 @@ ax.text(0.9, 0.3, r"f(x) > 0", ha="center")
 ax.text(1.8, 0.3, r"f(x) < 0", ha="center")
 
 # c). Add labels and legend
-ax.set_xlabel("Coordination preference (x)") 
+ax.set_xlabel("Coordination preference x") 
 ax.set_ylabel(r"Rate of change $\dot{x}$") 
 ax.legend(loc="upper right")
 ax.set_xlim(-2.1, 2.1)
@@ -256,8 +256,8 @@ ticks = [x_A_values[0], 0, eq_strong[0], x_B_values[0]] # define the y-ticks to 
 ax.set_yticks(ticks) # set the y-ticks to the defined values
 
 # 6. Add labels and legend
-ax.set_xlabel("Time (t) dimensionless")
-ax.set_ylabel("Coordination preference (x)")
+ax.set_xlabel("Time t (dimensionless)")
+ax.set_ylabel("Coordination preference x")
 ax.set_xlim(t0, t_end)
 ax.legend(loc="lower right")
 plt.show()
@@ -302,7 +302,7 @@ ax.scatter(eq_strong[0], 0, color="tab:red", zorder=3) # Stable equilibria
 # c). Add the horizontal line, labels, and x-axis limits
 ax.axhline(0, color="black", lw=0.8, linestyle="--") # Horizontal line at y = 0
 
-ax.set_xlabel("Coordination preference (x)")
+ax.set_xlabel("Coordination preference x")
 ax.set_ylabel(r"Rate of change $\dot{x}$")
 ax.legend(loc="upper right")
 ax.set_xlim(-2.1, 2.1)

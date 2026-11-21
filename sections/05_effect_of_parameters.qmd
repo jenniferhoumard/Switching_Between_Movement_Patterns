@@ -43,7 +43,7 @@ ax.text(0.9, 0.3, r"f(x) > 0", ha="center")
 ax.text(1.8, 0.3, r"f(x) < 0", ha="center")
 
 # c). Add labels and legend
-ax.set_xlabel("Coordination preference (x)") 
+ax.set_xlabel("Coordination preference x") 
 ax.set_ylabel(r"Rate of change $\dot{x}$") 
 ax.legend(loc="upper right")
 ax.set_xlim(-2.1, 2.1)
@@ -97,8 +97,8 @@ ticks = [x_A_values[0], 0, eq_strong[0], x_B_values[0]] # define the y-ticks to 
 ax.set_yticks(ticks) # set the y-ticks to the defined values
 
 # 6. Add labels and legend
-ax.set_xlabel("Time (t) dimensionless")
-ax.set_ylabel("Coordination preference (x)")
+ax.set_xlabel("Time t (dimensionless)")
+ax.set_ylabel("Coordination preference x")
 ax.set_xlim(t0, t_end)
 ax.legend(loc="lower right")
 plt.show()
@@ -155,7 +155,7 @@ ax.scatter(eq_strong[0], 0, color="tab:red", zorder=3) # Stable equilibria
 # c). Add the horizontal line, labels, and x-axis limits
 ax.axhline(0, color="black", lw=0.8, linestyle="--") # Horizontal line at y = 0
 
-ax.set_xlabel("Coordination preference (x)")
+ax.set_xlabel("Coordination preference x")
 ax.set_ylabel(r"Rate of change $\dot{x}$")
 ax.legend(loc="upper right")
 ax.set_xlim(-2.1, 2.1)
@@ -163,7 +163,7 @@ ax.set_xlim(-2.1, 2.1)
 plt.show()
 ```
 
-Using the same method as before, we found three equilibria: two stable equilibria at $x=-1.000$ and $x=+1.366$, and one unstable equilibrium at $x\approx-0.366$. Unlike $I=0.70$, the stable equilibrium favouring Pattern A still exists. Therefore, a preference starting at $x=-1.8$ would approach $x=-1.000$ and remain negative. This shows that the direction of the instruction is not the only important factor. Its strength also matters. $I =0.40$ is not strong enough to cause this starting preference to switch towards Pattern B, whereas $I=0.70$ is. The python code used for the equilibrium and stability analyses, Euler simulations, and instruction comparison is provided in [Appendix C](#appendix-c). 
+Using the same method as before, we found three equilibria: two stable equilibria at $x=-1.000$ and $x=+1.366$, and one unstable equilibrium at $x\approx-0.366$. Unlike $I=0.70$, the stable equilibrium favouring Pattern A still exists. Therefore, a preference starting at $x=-1.8$ would approach $x=-1.000$ and remain negative. This shows that the direction of the instruction is not the only important factor. Its strength also matters. $I =0.40$ is not strong enough to cause this starting preference to switch towards Pattern B, whereas $I=0.70$ is. The Python code used for the equilibrium and stability analyses, Euler simulations, and instruction comparison is provided in [Appendix C](#appendix-c). 
 
 ## Limitations of the model
 

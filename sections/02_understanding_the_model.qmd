@@ -3,7 +3,7 @@
 This model is used to describe how an athlete's preference for a coordination pattern changes over time. The model is represented by the following differential equation [@course2026]:
 
 $$
-\dot{x} = f(x) = a\,x - b\,x^{3} + I, \qquad a = 1.2,\; b = 0.8
+\boxed{\dot{x} = f(x) = a\,x - b\,x^{3} + I, \qquad a = 1.2,\; b = 0.8}
 $$
 
 Here, $\dot{x}$ indicates at what speed (rate of change) the preference $x$ changes over time (derivative of $x$ with respect to time). The state variable $x$ represents the preference for a movement pattern. We can interpret the values of $x$ thanks to its sign. When $x<0$, the athlete favours pattern A. When $x>0$, the athlete favours pattern B. When $x=0$, the athlete does not favour either pattern. The magnitude of $x$ indicates how strong the preference is. Values close to zero indicate a weak preference, while larger values correspond to a strong preference.

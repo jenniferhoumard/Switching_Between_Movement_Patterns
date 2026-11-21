@@ -19,7 +19,7 @@ The function `f(x, I)` computes the rate of change of the model, and `equilibriu
 We first study the model without any external instruction, so that neither pattern is favoured from the outside. With $I = 0$, $a = 1.2$ and $b = 0.8$, the model becomes:
 
 $$
-\dot{x} = f(x) = 1.2x - 0.8x^3 
+\boxed{\dot{x} = f(x) = 1.2x - 0.8x^3}
 $$
 
 Our aim is to find the preference values $x$ at which the coordination preference stops changing, that is, the values for which $\dot{x} = 0$. @fig-baseline-vector shows $f(x)$ for $x$ between $-2$ and $2$. The horizontal axis represents the coordination preference $x$, and the vertical axis represents its rate of change $\dot{x}$. When the curve is above the horizontal axis, the preference is increasing; when it is below, the preference is decreasing.
