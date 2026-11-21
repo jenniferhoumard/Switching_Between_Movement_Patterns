@@ -8,40 +8,40 @@ author:
   - name: "Jennifer Houmard"
 date: today
 date-format: "D MMMM YYYY"
-thanks: |
+thanks: |                             # add the github repository link to the title page
   Project repository:
   \url{https://github.com/jenniferhoumard/Switching_Between_Movement_Patterns}
 
 bibliography: references.bib
 csl: styles/apa.csl
-lang: en
+lang: en                              # report language english 
 
 execute:
-  echo: false
-  warning: false
-  message: false
+  echo: false                         # hide python code in the PDF
+  warning: false                      # hide warnings in the PDF
+  message: false                      # hide messages generated during execution
 
 format:
   pdf:
-    geometry: margin=1.5cm
-    pdf-engine: xelatex
-    documentclass: article
-    toc: true
-    toc-depth: 2
-    number-sections: true
-    colorlinks: true
-    fontsize: 11pt
-    code-overflow: wrap
-    fig-pos: H
-    include-in-header:
-      text: |
+    geometry: margin=1.5cm            # page margins
+    pdf-engine: xelatex               # LaTex engine used to generate PDF
+    documentclass: article            # use standard article layout 
+    toc: true                         # include a table of contents
+    toc-depth: 2                      # include sections and subsections in the table of contents
+    number-sections: true             # include section numbers
+    colorlinks: true                  # use coloured links in the PDF
+    fontsize: 11pt                    
+    code-overflow: wrap               # wrap code lines in the PDF
+    fig-pos: H                        # keep figures at their position in the text
+    include-in-header:                
+      text: |                         # additional LaTex settings
         \usepackage{fvextra}
         \DefineVerbatimEnvironment{Highlighting}{Verbatim}{breaklines,commandchars=\\\{\}}
         \usepackage{float}
         \usepackage{microtype}
         \emergencystretch=3em
 
-jupyter: python3
+jupyter: python3                      # execute python code using Python 3 jupiter kernel
 ---
 
 ```{=latex} 
