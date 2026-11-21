@@ -1,45 +1,3 @@
-
-<!--
-APPENDIX GUIDE
-
-PURPOSE
-The appendices contain the Python code used to generate
-the results presented in Sections 03, 04 and 05.
-
-ORGANISATION
-Appendix A: Code from Section 03 (Equilibria and Stability)
-Appendix B: Code from Section 04 (Euler Simulations)
-Appendix C: Code from Section 05 (Effect of Instruction)
-
-HOW TO MOVE THE CODE
-
-1. Keep the original executable Python chunks in the main
-   sections so the calculations and graphs still run.
-
-2. Add #| echo: false to hide the Python code in the PDF.
-
-3. Copy each code block into its corresponding appendix,
-   under the relevant subheading.
-
-4. In the appendix, use regular ```python code blocks
-   instead of executable ```{python} chunks.
-   This displays the code without running it again.
-
-5. Do not duplicate graphs or explanations in the appendix.
-   The main report contains the figures and interpretations.
-   The appendices contain the supporting code.
-
-6. Avoid defining the same functions repeatedly.
-   Functions introduced in Appendix A are reused in
-   the code shown in Appendices B and C.
-
-7. Keep all graphs in the main report, including the
-   comparison graph for I = 0.40 and I = 0.70.
-
-8. Before submission, remove these instructions and
-   check that all graphs and appendix links work.
--->
-
 ## GitHub Repository {.unnumbered .unlisted}
 
 The complete Quarto project, including the Python code, figures, and supporting files, is available in our GitHub repository:
@@ -59,34 +17,12 @@ The following appendices organise the Python code by report section.
 
 ## Libraries and Imports {.unnumbered .unlisted}
 
-<!--
-Include the Python libraries imported in master.qmd.
-These libraries are shared across Sections 03, 04 and 05.
-
-NumPy:
-- Numerical calculations and arrays.
-- Polynomial roots and equilibrium calculations.
-
-Matplotlib:
-- Rate-of-change graphs.
-- Euler trajectory graphs.
--->
-
 ```python
 import numpy as np
 import matplotlib.pyplot as plt
 ```
 
 ## Model Functions {.unnumbered .unlisted}
-
-<!--
-Include the two functions defined in Section 03:
-- f(x, I)
-- equilibrium_points(I)
-
-These functions are reused in Sections 04 and 05.
-Display the code without executing it again.
--->
 
 ```python
 def f(x, I):                                   # rate of change of the model: x_dot = ax - bx^3 + I
@@ -102,13 +38,6 @@ def equilibrium_points(I):                     # finds the values of x where f(x
 
 ## Equilibria and Stability for $I=0$ {.unnumbered .unlisted}
 
-<!--
-Include the code that:
-- Calculates the three real equilibria for I = 0.
-- Tests the sign of f(x) around the equilibria.
-- Identifies stable and unstable equilibria.
--->
-
 ```python
 eq = equilibrium_points(0.0)                   # calls equilibrium_points() defined above: the 3 equilibria for I = 0
 
@@ -117,17 +46,6 @@ stable = (f(eq - 0.01, 0.0) > 0) & (f(eq + 0.01, 0.0) < 0)  # 0.01: small enough
 ```
 
 ## Rate-of-Change Graph for $I=0$ {.unnumbered .unlisted}
-
-<!--
-Include the Python code used to generate fig-baseline-vector:
-- Calculate the rate of change.
-- Plot the curve.
-- Mark the equilibria.
-- Add arrows showing the direction of change.
-- Add axis labels and legend.
-
-Keep the rendered graph in Section 03.
--->
 
 ```python
 x = np.linspace(-2, 2, 400)                    # 400 values of x between -2 and 2
@@ -164,16 +82,6 @@ plt.show()                                     # displays the figure
 
 ## Simulation Settings and Initial Values {.unnumbered .unlisted}
 
-<!--
-Include the code defining:
-- Time step h = 0.01.
-- Initial time t0 = 0.
-- Final time t_end = 20.
-- Number of steps n_steps.
-- Time vector t.
-- Initial preferences -1.8 and +1.8.
--->
-
 ```python
 # 1. Set up the simulation
 
@@ -196,15 +104,6 @@ x_B[0] = 1.8                                   # initial condition x(0) = +1.8
 
 ## Euler Calculations for $I=0$ {.unnumbered .unlisted}
 
-<!--
-Include the Euler simulation code from Section 04:
-- Create the arrays for both initial preferences.
-- Apply Euler's method using a for loop.
-- Calculate the preference at each time step.
-
-Do not repeat the explanation of Euler's method.
--->
-
 ```python
 # 4. Apply Euler's method
 
@@ -214,17 +113,6 @@ for n in range(n_steps):                       # repeat for each of the 2000 tim
 ```
 
 ## Euler Trajectory Graph and Numerical Checks {.unnumbered .unlisted}
-
-<!--
-Include the code used to generate fig-baseline-trajectories:
-- Plot both trajectories.
-- Mark the equilibria and initial values.
-- Add axis labels and legend.
-
-Also include any numerical verification from Section 04.
-
-Keep the rendered graph in Section 04.
--->
 
 ```python
 # 5. Calculate the equilibria and determine their stability
@@ -282,15 +170,6 @@ print("Final preference for Pattern B:", round(x_B[-1], 4)) # should be close to
 
 ## Equilibrium Analysis for $I=0.70$ {.unnumbered .unlisted}
 
-<!--
-Include the code that:
-- Defines I_strong = 0.70.
-- Calculates eq_strong using equilibrium_points().
-- Checks stability on both sides of the equilibrium.
-
-Reuse the functions already defined in Appendix A.
--->
-
 ```python
 # 1. Calculate the rate of change and equilibrium for I = 0.70
 
@@ -310,17 +189,6 @@ for x_eq in eq_strong:
 ```
 
 ## Rate-of-Change Graph for $I=0.70$ {.unnumbered .unlisted}
-
-<!--
-Include the Python code used to generate fig-cue-vector:
-- Plot f(x) for I = 0.70.
-- Mark the stable equilibrium.
-- Add arrows showing the direction of change.
-- Add labels showing the sign of f(x).
-- Add axis labels and legend.
-
-Keep the rendered graph in Section 05.
--->
 
 ```python
 # 3. Plot the curve and the equilibrium 
@@ -352,16 +220,6 @@ print (eq_strong) # only one real equilibrium is calculated
 
 ## Euler Simulations for $I=0.70$ {.unnumbered .unlisted}
 
-<!--
-Include the code that:
-- Creates the arrays for initial values -1.8 and +1.8.
-- Applies Euler's method for I = 0.70.
-- Calculates both trajectories.
-- Displays the final numerical values.
-
-Reuse the simulation settings from Section 04.
--->
-
 ```python
 # 1. Prepare the arrays using the time values from Section 4
 x_A_values = np.zeros(n_steps + 1) # create empty array for starting value -1.8
@@ -380,16 +238,6 @@ print("Final preference from +1.8:", round(x_B_values[-1], 4))
 ```
 
 ## Euler Trajectory Graph for $I=0.70$ {.unnumbered .unlisted}
-
-<!--
-Include the Python code used to generate fig-cue-trajectories:
-- Plot both trajectories over time.
-- Mark the stable equilibrium at x ≈ 1.450.
-- Show the neutral preference at x = 0.
-- Add initial values, axis labels and legend.
-
-Keep the rendered graph in Section 05.
--->
 
 ```python
 # 4. Plot both trajectories and the equilibrium
@@ -417,16 +265,6 @@ plt.show()
 
 ## Weaker Instruction Analysis for $I=0.40$ {.unnumbered .unlisted}
 
-<!--
-Include the code that:
-- Defines I_weak = 0.40.
-- Calculates eq_weak using equilibrium_points().
-- Checks the stability of the three equilibria.
-- Prints the equilibrium values and classifications.
-
-Do not repeat the mathematical interpretation.
--->
-
 ```python
 # 1. Define the weaker positive instruction 
 I_weak = 0.40 
@@ -446,17 +284,6 @@ for x_eq in eq_weak:
 ```
 
 ## Comparison Graph for $I=0.40$ and $I=0.70$ {.unnumbered .unlisted}
-
-<!--
-Include the Python code used to generate
-fig-instruction-strength:
-- Plot both rate-of-change curves.
-- Mark the stable equilibria with filled points.
-- Mark the unstable equilibrium with an open point.
-- Add the horizontal zero line, labels and legend.
-
-Keep the rendered comparison graph in Section 05.
--->
 
 ```python
 # 4. Plot both instruction conditions
