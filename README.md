@@ -3,7 +3,7 @@
 **Mathematical Modeling — IEAP Final Project, Group E**  
 **Université de Montpellier**
 
-**Group members:** Gaia Gassole, Chloé Gilles, and Jennifer Houmard
+**Group members:** Gaia Gassiole, Chloé Gilles, and Jennifer Houmard
 
 ## 1. Project Overview
 
