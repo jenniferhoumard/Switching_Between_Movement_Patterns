@@ -3,7 +3,7 @@
 title: "Switching Between Movement Patterns"
 subtitle: "Mathematical Modeling — IEAP Final Project, Group E"
 author:
-  - name: "Gaia Gassole"
+  - name: "Gaia Gassiole"
   - name: "Chloé Gilles"
   - name: "Jennifer Houmard"
 date: today
@@ -40,6 +40,11 @@ format:
         \usepackage{float}
         \usepackage{microtype}
         \emergencystretch=3em
+        \usepackage{tocloft}
+        \setlength{\cftbeforesecskip}{3pt}
+        \setlength{\cftbeforesubsecskip}{0pt}
+        \renewcommand{\cftsubsecfont}{\small}
+        \renewcommand{\cftsubsecpagefont}{\small}
 
 jupyter: python3                      # execute python code using Python 3 jupiter kernel
 ---

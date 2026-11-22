@@ -1,18 +1,5 @@
 
-<!--
-PAGE GUIDE: About 1.5 pages.
 
-GOAL:
-Find the equilibrium points when there is no
-external instruction (I = 0) and determine
-which ones are stable or unstable.
-
-Include the graph, equilibrium values, and
-an explanation of stability.
-
-The page length includes text, figures, and tables.
-It is a guide, not a strict requirement.
--->
 ```{python}
 #| echo: false
 def f(x, I):                                   # rate of change of the model: x_dot = ax - bx^3 + I
@@ -29,44 +16,10 @@ The function `f(x, I)` computes the rate of change of the model, and `equilibriu
 
 ## Graphical equilibrium analysis at $I=0$
 
-<!--
-TO WRITE:
-
-1. Introduce what we are studying.
-   - Explain that we first study the model without
-     an external instruction (I = 0).
-   - Show the equation with I = 0:
-     x_dot = 1.2x - 0.8x³.
-   - Explain that we want to find the values of x
-     where the preference stops changing.
-
-2. Present the graph.
-   - Plot f(x) for x between -2 and 2.
-   - Use the Python graph provided below.
-   - Explain what each axis represents:
-     - Horizontal axis: coordination preference (x).
-     - Vertical axis: rate of change (x_dot).
-   - Refer to the figure in your explanation.
-
-3. Identify the equilibria.
-   - Find where the curve crosses the horizontal axis.
-   - Explain that these points are equilibria
-     because x_dot = 0.
-   - Give the approximate values:
-     x = -1.225, x = 0, x = +1.225.
-   - Identify the three points on the graph.
-
-4. Connect to the next subheading.
-   - Explain that finding the equilibria is
-     only the first step.
-   - We now need to determine which equilibria
-     are stable and which are unstable.
--->
-
 We first study the model without any external instruction, so that neither pattern is favoured from the outside. With $I = 0$, $a = 1.2$ and $b = 0.8$, the model becomes:
 
 $$
-\dot{x} = f(x) = 1.2x - 0.8x^3 
+\boxed{\dot{x} = f(x) = 1.2x - 0.8x^3}
 $$
 
 Our aim is to find the preference values $x$ at which the coordination preference stops changing, that is, the values for which $\dot{x} = 0$. @fig-baseline-vector shows $f(x)$ for $x$ between $-2$ and $2$. The horizontal axis represents the coordination preference $x$, and the vertical axis represents its rate of change $\dot{x}$. When the curve is above the horizontal axis, the preference is increasing; when it is below, the preference is decreasing.
@@ -108,52 +61,6 @@ The equilibria are the points where the curve crosses the horizontal axis, becau
 
 ## Stability from the sign of the rate of change
 
-<!--
-TO WRITE:
-
-1. Explain how we determine stability.
-   - Look at whether f(x) is positive or negative.
-   - If f(x) > 0, the preference increases
-     and moves to the right.
-   - If f(x) < 0, the preference decreases
-     and moves to the left.
-   - These directions tell us how x changes
-     around each equilibrium.
-
-2. Examine the graph.
-   - Check the direction of change in four areas:
-     - x < -1.225
-     - Between -1.225 and 0
-     - Between 0 and +1.225
-     - x > +1.225
-   - Explain whether x moves left or right
-     in each area.
-   - Use the arrows on the graph to help.
-
-3. Identify the stable equilibria.
-   - Explain that an equilibrium is stable when
-     the arrows on both sides point towards it.
-   - Show why x = -1.225 is stable.
-   - Show why x = +1.225 is stable.
-   - Explain that nearby preferences move
-     towards these points.
-
-4. Identify the unstable equilibrium.
-   - Explain that an equilibrium is unstable when
-     the arrows on both sides point away from it.
-   - Show why x = 0 is unstable.
-   - Explain that a small change away from zero
-     causes the preference to move further away.
-
-5. Summarize the findings.
-   - State how many stable and unstable
-     equilibria the model has when I = 0.
-   - Explain how the graph supports these results.
-   - Keep the focus on the mathematical results.
-   - Leave the movement interpretation for
-     the next subheading.
--->
-
 To determine stability, we use the phase-line method, so we look at the sign of $f(x)$ on either side of each equilibrium. When $f(x) > 0$, the preference increases and $x$ moves to the right. When $f(x) < 0$, the preference decreases and $x$ moves to the left. These directions tell us how $x$ changes around each equilibrium, and they are shown by the red arrows in @fig-baseline-vector.
 
 The three equilibria divide the horizontal axis into four regions:
@@ -169,79 +76,6 @@ In summary, when $I = 0$ the model has three equilibria: two stable equilibria a
 
 ## Interpretation: two possible attractors
 
-<!--
-TO WRITE:
-
-1. Connect the results to movement coordination.
-   - Explain that the model has two stable
-     coordination preferences when I = 0.
-   - The negative stable equilibrium represents
-     a preference for Pattern A.
-   - The positive stable equilibrium represents
-     a preference for Pattern B.
-   - Explain that neither pattern is favoured
-     by an external instruction in this condition.
-
-2. Introduce the idea of an attractor.
-   - Explain that an attractor is a stable state
-     towards which nearby values move.
-   - Explain that the two stable equilibria
-     act as attractors in this model.
-   - Use Haken, Kelso and Bunz (1985) to connect
-     attractors to movement coordination.
-     Add [@haken1985] after the explanation.
-   - You can also use Kelso and Schöner (1988)
-     to explain stable coordination patterns.
-     Citation: [@kelso1988].
-
-3. Explain the role of the starting preference.
-   - Explain that an athlete starting with
-     a negative preference tends towards
-     the stable state for Pattern A.
-   - An athlete starting with a positive
-     preference tends towards Pattern B.
-   - Explain that the starting value therefore
-     affects which stable state is reached.
-   - Remember that these are predictions of
-     the model, not measurements of real athletes.
-
-4. Connect to Section 4.
-   - Explain that we have identified the stable
-     states using the graph.
-   - In Section 4, we will use Python simulations
-     to see how the preference changes over time.
-   - We will check whether the simulations
-     approach the stable equilibria found here.
-   - Do not present the simulation results yet.
--->
-
-<!--
-CODE GUIDE 
-
-1. Create the graph.
-   - Use np.linspace() to create values from -2 to 2.
-   - Use f() to calculate the rate of change.
-   - Use ax.plot() to draw the curve.
-   - Use ax.axhline(0) to draw the zero line.
-
-2. Find the equilibria.
-   - Use equilibrium_points(0.0) to get the three values.
-   - Use ax.scatter() to mark them on the graph.
-
-3. Show the direction of change.
-   - Choose points between the equilibria.
-   - Use np.sign() to check whether f(x) is
-     positive or negative.
-   - Use ax.annotate() to draw arrows.
-   - Positive means right; negative means left.
-
-4. Finish the graph.
-   - Add axis labels and a figure caption.
-   - Check the equilibria and arrow directions.
-   - Explain the results in your own words.
-
-All libraries are already loaded in the master QMD.
--->
 These results can now be interpreted in terms of movement coordination. When $I = 0$, the model has two stable coordination preferences. The negative stable equilibrium ($x \approx -1.225$) represents a stable preference for Pattern A, and the positive stable equilibrium ($x \approx +1.225$) represents a stable preference for Pattern B. Because no instruction is given ($I = 0$), neither pattern is favoured from outside the system, and the two stable states are at the same distance from zero. The two stable equilibria act as the two attractors of the model (see Section 1), in line with the description of stable coordination patterns by Haken, Kelso and Bunz [@haken1985] and Kelso and Schöner [@kelso1988]. In our model, the unstable equilibrium at $x = 0$ plays the opposite role: it separates the two attractors, so that each side of zero leads to a different stable state. As a consequence, the starting preference determines which stable state is reached. According to the model, an athlete who starts with a negative preference tends towards the stable state for Pattern A, while an athlete who starts with a positive preference tends towards the stable state for Pattern B. The python code used to calculate the equilibria, check their stability, and generate the rate of change graph is provided in [Appendix A](#appendix-a). 
 
 In this section, the stable states were identified with a graphical method, using only the sign of $f(x)$. In Section 4, we use Euler’s method to simulate how the preference changes over time, and we check whether the simulated trajectories approach the stable equilibria found here.

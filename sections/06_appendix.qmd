@@ -1,45 +1,3 @@
-
-<!--
-APPENDIX GUIDE
-
-PURPOSE
-The appendices contain the Python code used to generate
-the results presented in Sections 03, 04 and 05.
-
-ORGANISATION
-Appendix A: Code from Section 03 (Equilibria and Stability)
-Appendix B: Code from Section 04 (Euler Simulations)
-Appendix C: Code from Section 05 (Effect of Instruction)
-
-HOW TO MOVE THE CODE
-
-1. Keep the original executable Python chunks in the main
-   sections so the calculations and graphs still run.
-
-2. Add #| echo: false to hide the Python code in the PDF.
-
-3. Copy each code block into its corresponding appendix,
-   under the relevant subheading.
-
-4. In the appendix, use regular ```python code blocks
-   instead of executable ```{python} chunks.
-   This displays the code without running it again.
-
-5. Do not duplicate graphs or explanations in the appendix.
-   The main report contains the figures and interpretations.
-   The appendices contain the supporting code.
-
-6. Avoid defining the same functions repeatedly.
-   Functions introduced in Appendix A are reused in
-   the code shown in Appendices B and C.
-
-7. Keep all graphs in the main report, including the
-   comparison graph for I = 0.40 and I = 0.70.
-
-8. Before submission, remove these instructions and
-   check that all graphs and appendix links work.
--->
-
 ## GitHub Repository {.unnumbered .unlisted}
 
 The complete Quarto project, including the Python code, figures, and supporting files, is available in our GitHub repository:
@@ -59,19 +17,6 @@ The following appendices organise the Python code by report section.
 
 ## Libraries and Imports {.unnumbered .unlisted}
 
-<!--
-Include the Python libraries imported in master.qmd.
-These libraries are shared across Sections 03, 04 and 05.
-
-NumPy:
-- Numerical calculations and arrays.
-- Polynomial roots and equilibrium calculations.
-
-Matplotlib:
-- Rate-of-change graphs.
-- Euler trajectory graphs.
--->
-
 ```python
 import numpy as np
 import matplotlib.pyplot as plt
@@ -79,39 +24,52 @@ import matplotlib.pyplot as plt
 
 ## Model Functions {.unnumbered .unlisted}
 
-<!--
-Include the two functions defined in Section 03:
-- f(x, I)
-- equilibrium_points(I)
+```python
+def f(x, I):                                   # rate of change of the model: x_dot = ax - bx^3 + I
+    return 1.2*x - 0.8*x**3 + I                # a = 1.2, b = 0.8, I = instruction
 
-These functions are reused in Sections 04 and 05.
-Display the code without executing it again.
--->
+def equilibrium_points(I):                     # finds the values of x where f(x) = 0
+    coeffs = [-0.8, 0, 1.2, I]                 # coefficients of -0.8x^3 + 0x^2 + 1.2x + I (from x^3 to constant)
+    roots = np.roots(coeffs)                   # all roots of the polynomial (some can be complex)
+    real_roots = roots[np.isclose(roots.imag, 0)].real  # keeps only real roots: x is a real preference value
+    return np.sort(real_roots)                 # sorted from smallest to largest (one real root for I = 0.70)
+```
 
 
 ## Equilibria and Stability for $I=0$ {.unnumbered .unlisted}
 
-<!--
-Include the code that:
-- Calculates the three real equilibria for I = 0.
-- Tests the sign of f(x) around the equilibria.
-- Identifies stable and unstable equilibria.
--->
+```python
+eq = equilibrium_points(0.0)                   # calls equilibrium_points() defined above: the 3 equilibria for I = 0
 
+# An equilibrium is stable if f > 0 just to its left and f < 0 just to its right
+stable = (f(eq - 0.01, 0.0) > 0) & (f(eq + 0.01, 0.0) < 0)  # 0.01: small enough to test each side of an equilibrium without reaching another one
+```
 
 ## Rate-of-Change Graph for $I=0$ {.unnumbered .unlisted}
 
-<!--
-Include the Python code used to generate fig-baseline-vector:
-- Calculate the rate of change.
-- Plot the curve.
-- Mark the equilibria.
-- Add arrows showing the direction of change.
-- Add axis labels and legend.
+```python
+x = np.linspace(-2, 2, 400)                    # 400 values of x between -2 and 2
 
-Keep the rendered graph in Section 03.
--->
+fig, ax = plt.subplots(figsize=(5, 3))         # creates the figure and the axes
+ax.plot(x, f(x, 0.0), label="f(x) = 1.2x − 0.8x³")  # draws the curve f(x), with its name in the legend
+ax.axhline(0, color="black", lw=0.8)           # draws the horizontal line y = 0
+ax.scatter(eq[stable], np.zeros(stable.sum()), color="black", zorder=3,
+           label="Stable equilibrium")         # filled black points for stable equilibria (drawn on top of the curve)
+ax.scatter(eq[~stable], np.zeros((~stable).sum()), facecolor="white",
+           edgecolor="black", zorder=3,
+           label="Unstable equilibrium")       # open (white) point for the unstable equilibrium
 
+# One arrow in each of the four regions: right if f > 0, left if f < 0
+for x_test in [-1.6, -0.6, 0.6, 1.6]:            # one test point in each of the 4 regions
+    d = np.sign(f(x_test, 0.0))                # +1 if f > 0 (x increases), -1 if f < 0 (x decreases)
+    ax.annotate("", xy=(x_test + 0.25 * d, 0), xytext=(x_test - 0.25 * d, 0),     # arrow pointing right if d = +1, left if d = -1
+                arrowprops=dict(arrowstyle="->", color="tab:red"))
+
+ax.set_xlabel("Coordination preference x")     # horizontal axis label
+ax.set_ylabel(r"Rate of change $\dot{x}$")     # vertical axis label
+ax.legend(loc="upper right")                   # shows the legend in the top-right corner
+plt.show()                                     # displays the figure
+```
 
 \newpage
 
@@ -124,126 +82,313 @@ Keep the rendered graph in Section 03.
 
 ## Simulation Settings and Initial Values {.unnumbered .unlisted}
 
-<!--
-Include the code defining:
-- Time step h = 0.01.
-- Initial time t0 = 0.
-- Final time t_end = 20.
-- Number of steps n_steps.
-- Time vector t.
-- Initial preferences -1.8 and +1.8.
--->
+```python
+# 1. Set up the simulation
 
+I = 0.0                                        # no external instruction
+h = 0.01                                       # time step (called dt in Lab 2)
+t0, t_end = 0.0, 20.0                          # start and end of the simulation
+n_steps = int(round((t_end - t0) / h))         # number of Euler steps: 20 / 0.01 = 2000 (same as Lab 2)
+
+# 2. Create the time values
+
+t = np.linspace(t0, t_end, n_steps + 1)        # 2001 time values: 0, 0.01, 0.02, ..., 20 (the +1 is the starting point)
+
+# 3. Prepare the arrays and starting values
+
+x_A = np.zeros(n_steps + 1)                    # create an array of 2001 zeros, filled later with the preference over time (Pattern A side)
+x_B = np.zeros(n_steps + 1)                    # array of 2001 zeros, filled later with the preference over time (Pattern B side)
+x_A[0] = -1.8                                  # initial condition x(0) = -1.8
+x_B[0] = 1.8                                   # initial condition x(0) = +1.8
+```
 
 ## Euler Calculations for $I=0$ {.unnumbered .unlisted}
 
-<!--
-Include the Euler simulation code from Section 04:
-- Create the arrays for both initial preferences.
-- Apply Euler's method using a for loop.
-- Calculate the preference at each time step.
+```python
+# 4. Apply Euler's method
 
-Do not repeat the explanation of Euler's method.
--->
-
+for n in range(n_steps):                       # repeat for each of the 2000 time steps
+    x_A[n + 1] = x_A[n] + h * f(x_A[n], I)     # new value = old value + step size * rate of change at the old value
+    x_B[n + 1] = x_B[n] + h * f(x_B[n], I)     # same Euler update for the second starting value
+```
 
 ## Euler Trajectory Graph and Numerical Checks {.unnumbered .unlisted}
 
-<!--
-Include the code used to generate fig-baseline-trajectories:
-- Plot both trajectories.
-- Mark the equilibria and initial values.
-- Add axis labels and legend.
+```python
+# 5. Calculate the equilibria and determine their stability
 
-Also include any numerical verification from Section 04.
+# 0.01 is a small distance used to test stability left and right of the equilibrium
 
-Keep the rendered graph in Section 04.
--->
+eq = equilibrium_points(I)                     # the 3 equilibria for I = 0: -1.225, 0, +1.225
+stable = (f(eq - 0.01, I) > 0) & (f(eq + 0.01, I) < 0)  # True for stable equilibria (same test as Section 3)
 
+# 6. Create the graph and plot both trajectories
+
+fig, ax = plt.subplots(figsize=(5, 3))         # creates the figure and the axes
+ax.plot(t, x_A, color="tab:blue", label="x(0) = -1.8")   # trajectory starting on the Pattern A side
+ax.plot(t, x_B, color="tab:orange", label="x(0) = +1.8") # trajectory starting on the Pattern B side
+
+# 7. Mark the starting values
+
+ax.scatter([t0, t0], [x_A[0], x_B[0]], color=["tab:blue", "tab:orange"],
+           zorder=3, clip_on=False)            # dots on the starting values x(0) = -1.8 and +1.8
+
+# 8. Draw the stable and unstable equilibrium lines
+
+for e in eq[stable]:                           # one dashed line per stable equilibrium
+    ax.axhline(e, color="black", lw=0.8, ls="--")          # horizontal reference line at the stable equilibrium
+ax.axhline(0, color="grey", lw=0.8)            # horizontal line x = 0 (unstable equilibrium, no preference)
+
+# 9. Set the vertical axis ticks
+
+ticks = [x_A[0], eq[0], eq[1], eq[2], x_B[0]]  # starting values and the 3 equilibria, all taken from the computed results
+ax.set_yticks(ticks)                           # places the ticks exactly at these values
+ax.set_yticklabels([str(round(float(v), 3)) for v in ticks])  # labels computed from the values, rounded to 3 decimals
+
+# 10. Add axis labels, legend, and display the graph
+
+ax.set_xlabel("Time t (dimensionless)")        # horizontal axis label (time has no unit in this model)
+ax.set_ylabel("Coordination preference x")     # vertical axis label (same wording as Section 3)
+ax.set_xlim(t0, t_end)                         # shows the whole simulation, from t = 0 to t = 20
+ax.legend(loc="center right")                  # legend placed where it does not hide the curves
+plt.show()                                     # displays the figure
+
+# Numerical check
+print("Number of Euler steps:", n_steps)
+print("Final preference for Pattern A:", round(x_A[-1], 4)) # should be close to -1.225
+print("Final preference for Pattern B:", round(x_B[-1], 4)) # should be close to +1.225
+```
 
 \newpage
 
 ::: {#appendix-c}
 \begin{center}
 \textbf{Appendix C}\\
-\textbf{Python Code for Section 05: Effect of Instruction}
+\textbf{Python Code for Section 05: Effect of Parameters}
 \end{center}
 :::
 
 ## Equilibrium Analysis for $I=0.70$ {.unnumbered .unlisted}
 
-<!--
-Include the code that:
-- Defines I_strong = 0.70.
-- Calculates eq_strong using equilibrium_points().
-- Checks stability on both sides of the equilibrium.
+```python
+# 1. Calculate the rate of change and equilibrium for I = 0.70
 
-Reuse the functions already defined in Appendix A.
--->
+I_strong =  0.70 # define the positive instruction value
+x_values = np.linspace(-2, 2, 400) # generate 400 equally spaced x values
+eq_strong = equilibrium_points(I_strong)  # Use the function from Section 3 to find only the real equilibria
 
+# 2. Check the stability of the equilibrium 
+for x_eq in eq_strong: 
+  left = f(x_eq-0.01, I_strong)
+  right = f(x_eq+0.01, I_strong)
+  if left > 0 and right < 0:
+    stability = "Stable"
+  else:
+    stability = "Unstable"
+  print(round(x_eq,3), stability)
+```
 
 ## Rate-of-Change Graph for $I=0.70$ {.unnumbered .unlisted}
 
-<!--
-Include the Python code used to generate fig-cue-vector:
-- Plot f(x) for I = 0.70.
-- Mark the stable equilibrium.
-- Add arrows showing the direction of change.
-- Add labels showing the sign of f(x).
-- Add axis labels and legend.
+```python
+# 3. Plot the curve and the equilibrium 
+fig, ax = plt.subplots(figsize=(5, 3)) # create a figure and axis object
+ax.plot(x_values, f(x_values, I_strong), label = "f(x) = 1.2x - 0.8x³ + 0.70") # plot the rate of change function using the x values and positive instruction defined above
+ax.axhline(0, color='black', lw=0.8, linestyle='--') # plot horizontal line at y=0 to indicate where the rate of change is zero
+ax.scatter(eq_strong, np.zeros(len(eq_strong)), color = 'black', label = "Stable equilibrium", zorder = 3) # plot the equilibrium point(s) on the graph
 
-Keep the rendered graph in Section 05.
--->
+# a). Add arrows to on each side of the equilibrium to show stability
+for x_test in [1.15, 1.75]: # one test point in each of the 2 regions
+  direction = np.sign(f(x_test, I_strong)) # +1: right, -1: left
+  ax.annotate("", xy=(x_test + 0.25 * direction, 0), # 0.25 is half the length of the arrow
+              xytext=(x_test - 0.25 * direction, 0),
+              arrowprops=dict(arrowstyle='->', color='red')) # add arrows to indicate the direction of change
 
+# b). Add labels showing the sign of f(x) on each side of the equilibrium
+ax.text(0.9, 0.3, r"f(x) > 0", ha="center")
+ax.text(1.8, 0.3, r"f(x) < 0", ha="center")
+
+# c). Add labels and legend
+ax.set_xlabel("Coordination preference x") 
+ax.set_ylabel(r"Rate of change $\dot{x}$") 
+ax.legend(loc="upper right")
+ax.set_xlim(-2.1, 2.1)
+plt.show() 
+
+print (eq_strong) # only one real equilibrium is calculated
+```
 
 ## Euler Simulations for $I=0.70$ {.unnumbered .unlisted}
 
-<!--
-Include the code that:
-- Creates the arrays for initial values -1.8 and +1.8.
-- Applies Euler's method for I = 0.70.
-- Calculates both trajectories.
-- Displays the final numerical values.
+```python
+# 1. Prepare the arrays using the time values from Section 4
+x_A_values = np.zeros(n_steps + 1) # create empty array for starting value -1.8
+x_B_values = np.zeros(n_steps + 1) # create empty array for starting value +1.8
+x_A_values[0] = -1.8 # define the first value for the first array
+x_B_values[0] = +1.8 # define the first value for the second array
 
-Reuse the simulation settings from Section 04.
--->
+# 2. Apply the Euler method for I = 0.70
+for n in range(n_steps): # run the loop 2000 times 
+  x_A_values[n + 1] = x_A_values[n] + h * f(x_A_values[n], I_strong)
+  x_B_values[n + 1] = x_B_values[n] + h * f(x_B_values[n], I_strong)
 
+# 3. Display the results
+print("Final preference from -1.8:", round(x_A_values[-1], 4))
+print("Final preference from +1.8:", round(x_B_values[-1], 4))
+```
 
 ## Euler Trajectory Graph for $I=0.70$ {.unnumbered .unlisted}
 
-<!--
-Include the Python code used to generate fig-cue-trajectories:
-- Plot both trajectories over time.
-- Mark the stable equilibrium at x ≈ 1.450.
-- Show the neutral preference at x = 0.
-- Add initial values, axis labels and legend.
+```python
+# 4. Plot both trajectories and the equilibrium
+fig, ax = plt.subplots(figsize=(5, 3)) # create a figure and axis
 
-Keep the rendered graph in Section 05.
--->
+ax.plot(t, x_A_values, color = "tab:blue", label = "x(0) = -1.8")
+ax.plot(t, x_B_values, color = "tab:orange", label = "x(0) = +1.8")
 
+ax.axhline(eq_strong[0], color="black", lw=0.8, ls = "--") # add horizontal line at the equilibrium
+ax.axhline(0, color="grey", lw=0.8) # add horizontal line at y=0
+
+ax.scatter([t0, t0], [x_A_values[0], x_B_values[0]], color = ["tab:blue" ,"tab:orange"], zorder=3, clip_on=False) # add points for the starting values
+
+# 5. Set the y-ticks to show the starting values and the equilibrium
+ticks = [x_A_values[0], 0, eq_strong[0], x_B_values[0]] # define the y-ticks to show the starting values and the equilibrium
+ax.set_yticks(ticks) # set the y-ticks to the defined values
+
+# 6. Add labels and legend
+ax.set_xlabel("Time t (dimensionless)")
+ax.set_ylabel("Coordination preference x")
+ax.set_xlim(t0, t_end)
+ax.legend(loc="lower right")
+plt.show()
+```
 
 ## Weaker Instruction Analysis for $I=0.40$ {.unnumbered .unlisted}
 
-<!--
-Include the code that:
-- Defines I_weak = 0.40.
-- Calculates eq_weak using equilibrium_points().
-- Checks the stability of the three equilibria.
-- Prints the equilibrium values and classifications.
+```python
+# 1. Define the weaker positive instruction 
+I_weak = 0.40 
 
-Do not repeat the mathematical interpretation.
--->
+# 2. Find the real equilibria for I = 0.40 using the function from Section 3
+eq_weak = equilibrium_points(I_weak)
 
+# 3. Check stability on both sides of each equilibrium
+for x_eq in eq_weak: 
+  left = f(x_eq-0.01, I_weak)
+  right = f(x_eq+0.01, I_weak)
+  if left > 0 and right < 0:
+    stability = "Stable"
+  else:
+    stability = "Unstable"
+  print(round(x_eq,3), stability)
+```
 
 ## Comparison Graph for $I=0.40$ and $I=0.70$ {.unnumbered .unlisted}
 
-<!--
-Include the Python code used to generate
-fig-instruction-strength:
-- Plot both rate-of-change curves.
-- Mark the stable equilibria with filled points.
-- Mark the unstable equilibrium with an open point.
-- Add the horizontal zero line, labels and legend.
+```python
+# 4. Plot both instruction conditions
+fig, ax = plt.subplots(figsize=(5, 3))
 
-Keep the rendered comparison graph in Section 05.
--->
+ax.plot(x_values, f(x_values, I_weak), color="tab:green", label="I = 0.40") # I=0.40
+ax.plot(x_values, f(x_values, I_strong), color="tab:red", label="I = 0.70") # I=0.70
+
+# a). Mark the equilibria for I = 0.40
+ax.scatter([eq_weak[0], eq_weak[2]], [0, 0], color="tab:green", zorder=3)  # Stable equilibria
+ax.scatter(eq_weak[1], 0, facecolors="white", edgecolors="tab:green", zorder=3)  # Unstable equilibrium
+
+# b). Mark the equilibrium for I = 0.70
+ax.scatter(eq_strong[0], 0, color="tab:red", zorder=3) # Stable equilibria
+
+# c). Add the horizontal line, labels, and x-axis limits
+ax.axhline(0, color="black", lw=0.8, linestyle="--") # Horizontal line at y = 0
+
+ax.set_xlabel("Coordination preference x")
+ax.set_ylabel(r"Rate of change $\dot{x}$")
+ax.legend(loc="upper right")
+ax.set_xlim(-2.1, 2.1)
+
+plt.show()
+```
+
+\newpage
+
+::: {#appendix-d}
+\begin{center}
+\textbf{Appendix D}\\
+\textbf{Group Workflow}
+\end{center}
+:::
+
+## Project Structure {.unnumbered .unlisted}
+
+The project is organised as follows:
+
+```text
+Switching_Between_Movement_Patterns
+│
+├── master.qmd                         # Main Quarto report
+├── README.md                          # Project documentation
+├── references.bib                     # Bibliography
+├── .gitignore
+├── LICENSE
+│
+├── sections
+│   ├── 01_introduction.qmd
+│   ├── 02_understanding_the_model.qmd
+│   ├── 03_equilibria_and_stability.qmd
+│   ├── 04_euler_simulations.qmd
+│   ├── 05_effect_of_parameters.qmd
+│   └── 06_appendix.qmd
+│
+├── figures
+│   └── model_comparison.png
+│
+└── styles
+    └── apa.csl
+```
+
+The `master.qmd` file contains the shared Python imports, PDF settings, and table of contents. It combines the five main sections, references, and appendices into one report. Sections 03, 04, and 05 share Python functions and variables, so they must be executed in order.
+
+We chose Quarto with VS Code because it allowed us to organise the report into separate `.qmd` files and automatically combine them using `master.qmd`. This was particularly useful for group collaboration, as each member could develop their sections independently. Since Quarto files are plain text, we could easily track changes, review pull requests, and resolve conflicts through GitHub. Quarto also allowed us to manage the PDF formatting centrally and generate the complete report without manually combining the sections. We used VS Code to develop the files and Jupyter to execute the Python code through Quarto.
+
+The repository structure and the main section headings were prepared at the beginning of the project. Each section also contained guidelines explaining what needed to be included, helping everyone follow the same organisation.
+
+## Group Organisation {.unnumbered .unlisted}
+
+The project was divided between three group members, with each member responsible for specific Quarto sections.
+
+| Group member | Assigned Quarto documents |
+|---|---|
+| Jennifer Houmard (GitHub setup) | 01 Introduction, 05 Effect of Parameters |
+| Gaia Gassole | 02 Understanding the Model, 04 Euler Simulations |
+| Chloé Gilles | 03 Equilibria and Stability, 06 Appendix |
+
+One member created the GitHub repository and prepared the initial Quarto project structure. Each section contained predefined headings and short guidelines explaining what needed to be included. This allowed members to work independently while following the same organisation.
+
+All members participated in reviewing the sections, checking the mathematical results, and improving the consistency of the final report.
+
+## Git Branching Strategy {.unnumbered .unlisted}
+
+A separate GitHub branch was created for each Quarto section.
+
+| Branch | Assigned member |
+|---|---|
+| 01_introduction | Jennifer Houmard |
+| 02_understanding_the_model | Gaia Gassole |
+| 03_equilibria_and_stability | Chloé Gilles |
+| 04_euler_simulations | Gaia Gassole |
+| 05_effect_of_parameters | Jennifer Houmard |
+| 06_Appendix | Chloé Gilles |
+
+## Workflow {.unnumbered .unlisted}
+
+1. Create a branch from the latest `main` branch.
+2. Develop the assigned `.qmd` section using the predefined headings and guidelines.
+3. Commit and push changes to the corresponding branch.
+4. Open a pull request into `main`.
+5. The other group members review the changes and leave comments suggesting improvements.
+6. Update the branch to address the feedback.
+7. Merge the reviewed and approved pull request into `main`.
+8. Review the complete report to check mathematical accuracy, consistency between sections, and formatting.
+
+We used pull requests to review each other's contributions before merging them into the main report. This helped us identify mistakes, discuss improvements, and maintain a consistent structure across the different sections.
