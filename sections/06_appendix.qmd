@@ -124,7 +124,7 @@ stable = (f(eq - 0.01, I) > 0) & (f(eq + 0.01, I) < 0)  # True for stable equili
 
 # 6. Create the graph and plot both trajectories
 
-fig, ax = plt.subplots(figsize=(5, 3))         # creates the figure (6 x 4 inches) and the axes
+fig, ax = plt.subplots(figsize=(5, 3))         # creates the figure and the axes
 ax.plot(t, x_A, color="tab:blue", label="x(0) = -1.8")   # trajectory starting on the Pattern A side
 ax.plot(t, x_B, color="tab:orange", label="x(0) = +1.8") # trajectory starting on the Pattern B side
 
@@ -164,7 +164,7 @@ print("Final preference for Pattern B:", round(x_B[-1], 4)) # should be close to
 ::: {#appendix-c}
 \begin{center}
 \textbf{Appendix C}\\
-\textbf{Python Code for Section 05: Effect of Instruction}
+\textbf{Python Code for Section 05: Effect of Parameters}
 \end{center}
 :::
 
@@ -200,7 +200,7 @@ ax.scatter(eq_strong, np.zeros(len(eq_strong)), color = 'black', label = "Stable
 # a). Add arrows to on each side of the equilibrium to show stability
 for x_test in [1.15, 1.75]: # one test point in each of the 2 regions
   direction = np.sign(f(x_test, I_strong)) # +1: right, -1: left
-  ax.annotate("", xy=(x_test + 0.25 * direction, 0), # 0.25 is the length of the arrow
+  ax.annotate("", xy=(x_test + 0.25 * direction, 0), # 0.25 is half the length of the arrow
               xytext=(x_test - 0.25 * direction, 0),
               arrowprops=dict(arrowstyle='->', color='red')) # add arrows to indicate the direction of change
 
@@ -309,3 +309,86 @@ ax.set_xlim(-2.1, 2.1)
 
 plt.show()
 ```
+
+\newpage
+
+::: {#appendix-d}
+\begin{center}
+\textbf{Appendix D}\\
+\textbf{Group Workflow}
+\end{center}
+:::
+
+## Project Structure {.unnumbered .unlisted}
+
+The project is organised as follows:
+
+```text
+Switching_Between_Movement_Patterns
+│
+├── master.qmd                         # Main Quarto report
+├── README.md                          # Project documentation
+├── references.bib                     # Bibliography
+├── .gitignore
+├── LICENSE
+│
+├── sections
+│   ├── 01_introduction.qmd
+│   ├── 02_understanding_the_model.qmd
+│   ├── 03_equilibria_and_stability.qmd
+│   ├── 04_euler_simulations.qmd
+│   ├── 05_effect_of_parameters.qmd
+│   └── 06_appendix.qmd
+│
+├── figures
+│   └── model_comparison.png
+│
+└── styles
+    └── apa.csl
+```
+
+The `master.qmd` file contains the shared Python imports, PDF settings, and table of contents. It combines the five main sections, references, and appendices into one report. Sections 03, 04, and 05 share Python functions and variables, so they must be executed in order.
+
+We chose Quarto with VS Code because it allowed us to organise the report into separate `.qmd` files and automatically combine them using `master.qmd`. This was particularly useful for group collaboration, as each member could develop their sections independently. Since Quarto files are plain text, we could easily track changes, review pull requests, and resolve conflicts through GitHub. Quarto also allowed us to manage the PDF formatting centrally and generate the complete report without manually combining the sections. We used VS Code to develop the files and Jupyter to execute the Python code through Quarto.
+
+The repository structure and the main section headings were prepared at the beginning of the project. Each section also contained guidelines explaining what needed to be included, helping everyone follow the same organisation.
+
+## Group Organisation {.unnumbered .unlisted}
+
+The project was divided between three group members, with each member responsible for specific Quarto sections.
+
+| Group member | Assigned Quarto documents |
+|---|---|
+| Jennifer Houmard (GitHub setup) | 01 Introduction, 05 Effect of Parameters |
+| Gaia Gassole | 02 Understanding the Model, 04 Euler Simulations |
+| Chloé Gilles | 03 Equilibria and Stability, 06 Appendix |
+
+One member created the GitHub repository and prepared the initial Quarto project structure. Each section contained predefined headings and short guidelines explaining what needed to be included. This allowed members to work independently while following the same organisation.
+
+All members participated in reviewing the sections, checking the mathematical results, and improving the consistency of the final report.
+
+## Git Branching Strategy {.unnumbered .unlisted}
+
+A separate GitHub branch was created for each Quarto section.
+
+| Branch | Assigned member |
+|---|---|
+| 01_introduction | Jennifer Houmard |
+| 02_understanding_the_model | Gaia Gassole |
+| 03_equilibria_and_stability | Chloé Gilles |
+| 04_euler_simulations | Gaia Gassole |
+| 05_effect_of_parameters | Jennifer Houmard |
+| 06_Appendix | Chloé Gilles |
+
+## Workflow {.unnumbered .unlisted}
+
+1. Create a branch from the latest `main` branch.
+2. Develop the assigned `.qmd` section using the predefined headings and guidelines.
+3. Commit and push changes to the corresponding branch.
+4. Open a pull request into `main`.
+5. The other group members review the changes and leave comments suggesting improvements.
+6. Update the branch to address the feedback.
+7. Merge the reviewed and approved pull request into `main`.
+8. Review the complete report to check mathematical accuracy, consistency between sections, and formatting.
+
+We used pull requests to review each other's contributions before merging them into the main report. This helped us identify mistakes, discuss improvements, and maintain a consistent structure across the different sections.

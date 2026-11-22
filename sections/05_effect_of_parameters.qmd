@@ -108,7 +108,7 @@ As shown in @fig-cue-trajectories, both trajectories approach the same positive 
 
 ## Comparing both instruction conditions
 
-![Comparison of two instruction conditions ($I=0$ and $I=0.70$).](figures/model_comparison.png){#fig-compare-models width=65%}
+![Comparison of two instruction conditions ($I=0$ and $I=0.70$). *Note.* Schematic generated using ChatGPT (OpenAI, 2026).](figures/model_comparison.png){#fig-compare-models width=65%} 
 
 As shown in @fig-compare-models, the positive instruction changes the number of stable equilibria from two to one. Without an instruction, the two starting preferences approach different stable equilibria. When $I=0$, the model has two stable states: one favouring Pattern A and one favouring Pattern B, separated by an unstable equilibrium at ($x=0$). With a positive instruction $I=0.70$, the stable equilibrium favouring Pattern A and the unstable equilibrium (initially at $x=0$) have disappeared. As the instruction increases, these two equilibria move towards each other and eventually disappear. Both starting preferences then approach the same stable equilibrium favouring Pattern B. The positive instruction therefore changes which stable preferences are possible in this model, allowing a preference that initially favours Pattern A to switch to Pattern B. A negative instruction would have the opposite effect, favouring Pattern A instead. For example with $I=-0.70$, both starting preferences would approach a single stable equilibrium at $x\approx-1.450$, favouring Pattern A.
 
@@ -169,4 +169,9 @@ Using the same method as before, we found three equilibria: two stable equilibri
 
 One limitation is that the model does not account for natural variability in an athlete's coordination. Even when repeating the same movement, an athlete may show small changes in movement timing and muscle activation due to fatigue or sensory feedback. For $I=0$, a preference starting at $x=-1.8$ always approaches the stable equilibrium at $x\approx-1.225$ and never switches to Pattern B. However, if a sufficiently large disturbance (e.g., timing error or muscle fatigue) moved the preference beyond the unstable equilibrium at $x=0$, it could cause the preference to move towards the stable equilibrium favouring Pattern B, even without an external instruction. Therefore, the model cannot predict switches caused by natural coordination variability. 
 
+## Conclusion {.unnumbered .unlisted}
+
+In this project, we used a simple one-variable model to study how an external instruction can influence an athlete's preference between two abstract movement patterns. Without instruction ($I = 0$), the model has two stable preferences, one for Pattern A ($x \approx -1.225$) and one for Pattern B ($x \approx +1.225$), separated by an unstable equilibrium at $x = 0$. In this case, the starting preference decides which pattern is reached, and the Euler simulations confirm that no switch occurs.
+
+A positive instruction changes this picture. With $I = 0.70$, only the stable preference for Pattern B remains ($x \approx +1.450$), so both starting preferences end up there, and the one starting at $x(0) = -1.8$ switches from Pattern A to Pattern B. With a weaker instruction ($I = 0.40$), both stable preferences still exist and the preference starting at $x(0) = -1.8$ stays with Pattern A. The instruction therefore has to be strong enough, and not only positive, to cause a switch.
 
