@@ -24,7 +24,7 @@ In Section 3, we used graphical analysis to identify which equilibria are stable
 The formula for the Euler method is:
 
 $$
-\boxed{...} autour de x_{n+1} = x_n + h \, f(x_n)
+\boxed{x_{n+1} = x_n + h \, f(x_n)}
 $$
 
 where $x_n$ is the current preference, $x_{n+1}$ is the preference at the next step, $h$ is the size of the time step, and $f(x_n)$ is the rate of change (speed) at the current step: $f(x_n)$ is the value of $\dot{x}$ at step $n$. The method is called explicit because the next preference, ($x_{n+1}$) is calculated directly from the current preference, ($x_n$), using values that are already known. When applying this method to our model, we get:
@@ -177,7 +177,7 @@ stable = (f(eq - 0.01, I) > 0) & (f(eq + 0.01, I) < 0)  # True for stable equili
 
 # 6. Create the graph and plot both trajectories
 
-fig, ax = plt.subplots(figsize=(6, 4))         # creates the figure (6 x 4 inches) and the axes
+fig, ax = plt.subplots(figsize=(5, 3))         # creates the figure (6 x 4 inches) and the axes
 ax.plot(t, x_A, color="tab:blue", label="x(0) = -1.8")   # trajectory starting on the Pattern A side
 ax.plot(t, x_B, color="tab:orange", label="x(0) = +1.8") # trajectory starting on the Pattern B side
 
@@ -215,13 +215,9 @@ print("Final preference for Pattern A:", round(x_A[-1], 4)) # should be close to
 print("Final preference for Pattern B:", round(x_B[-1], 4)) # should be close to +1.225
 ```
 
-@fig-baseline-trajectories shows how the coordination preference $x$ changes over time $t$ for the two starting values: $x(0) = -1.8$ (blue line) and $x(0) = +1.8$ (orange line). The dashed black lines show the two stable equilibria, while the grey line shows the unstable equilibrium $x = 0$.
+@fig-baseline-trajectories shows how the coordination preference $x$ changes over time $t$ for the two starting values: $x(0) = -1.8$ (blue line) and $x(0) = +1.8$ (orange line). The dashed black lines show the two stable equilibria, while the grey line shows the unstable equilibrium $x = 0$. We can see that the two trajectories behave in opposite but symmetrical ways. Starting from $x(0) = -1.8$, the preference increases, while starting from $x(0) = +1.8$, it decreases. In both cases, the preference evolves quickly at first, but then slows down as it approaches a stable equilibrium. Both trajectories are practically constant (within $0.01$ of the equilibrium) after $t \approx 1.5$. The two simulations reach different final preferences: approximately $-1.225$ for the negative starting value and approximately $+1.225$ for the positive starting value, which are the two stable equilibria identified in Section 3 (@fig-baseline-vector). Furthermore, neither of the trajectories crosses $x=0$. The simulations are therefore consistent with the stability analysis. In terms of movement coordination, each trajectory is attracted to the stable state on its side of zero: Pattern A for $x(0) = -1.8$ and Pattern B for $x(0) = +1.8$. While their preferences become less extreme over time, they do not switch to the other pattern. Consequently, without any instruction, the starting preference determines which pattern is finally preferred. The python code used for the Euler simulation and trajectory graph is provided in [Appendix B](#appendix-b). 
 
-We can see that the two trajectories behave in opposite but symmetrical ways. Starting from $x(0) = -1.8$, the preference increases, while starting from $x(0) = +1.8$, it decreases. In both cases, the preference evolves quickly at first, but then slows down as it approaches a stable equilibrium. Both trajectories are practically constant (within $0.01$ of the equilibrium) after $t \approx 1.5$.
-
-The two simulations reach different final preferences: approximately $-1.225$ for the negative starting value and approximately $+1.225$ for the positive starting value, which are the two stable equilibria identified in Section 3 (@fig-baseline-vector). Furthermore, neither of the trajectories crosses $x=0$. The simulations are therefore consistent with the stability analysis.
-
-In terms of movement coordination, each trajectory is attracted to the stable state on its side of zero: Pattern A for $x(0) = -1.8$ and Pattern B for $x(0) = +1.8$. While their preferences become less extreme over time, they do not switch to the other pattern. Consequently, without any instruction, the starting preference determines which pattern is finally preferred. In the next section, we will repeat this analysis with an external instruction of $I = 0.70$. We will compare how the stable preferences and simulation results change with this new condition.
+In the next section, we will repeat this analysis with an external instruction of $I = 0.70$. We will compare how the stable preferences and simulation results change with this new condition.
 
 <!--
 TO WRITE:
