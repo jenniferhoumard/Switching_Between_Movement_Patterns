@@ -36,7 +36,7 @@ eq = equilibrium_points(0.0)                   # calls equilibrium_points() defi
 # An equilibrium is stable if f > 0 just to its left and f < 0 just to its right
 stable = (f(eq - 0.01, 0.0) > 0) & (f(eq + 0.01, 0.0) < 0)  # 0.01: small enough to test each side of an equilibrium without reaching another one
 
-fig, ax = plt.subplots(figsize=(6, 4))         # creates the figure (6 x 4 inches) and the axes
+fig, ax = plt.subplots(figsize=(5, 3))         # creates the figure (5 x 3 inches) and the axes
 ax.plot(x, f(x, 0.0), label="f(x) = 1.2x − 0.8x³")  # draws the curve f(x), with its name in the legend
 ax.axhline(0, color="black", lw=0.8)           # draws the horizontal line y = 0
 ax.scatter(eq[stable], np.zeros(stable.sum()), color="black", zorder=3,

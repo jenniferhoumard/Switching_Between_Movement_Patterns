@@ -70,7 +70,7 @@ stable = (f(eq - 0.01, I) > 0) & (f(eq + 0.01, I) < 0)  # True for stable equili
 
 # 6. Create the graph and plot both trajectories
 
-fig, ax = plt.subplots(figsize=(6, 4))         # creates the figure (6 x 4 inches) and the axes
+fig, ax = plt.subplots(figsize=(5, 3))         # creates the figure (5 x 3 inches) and the axes
 ax.plot(t, x_A, color="tab:blue", label="x(0) = -1.8")   # trajectory starting on the Pattern A side
 ax.plot(t, x_B, color="tab:orange", label="x(0) = +1.8") # trajectory starting on the Pattern B side
 

@@ -23,7 +23,7 @@ execute:
 
 format:
   pdf:
-    geometry: margin=1.5cm            # page margins
+    geometry: margin=2.2cm            # page margins
     pdf-engine: xelatex               # LaTex engine used to generate PDF
     documentclass: article            # use standard article layout 
     toc: true                         # include a table of contents
