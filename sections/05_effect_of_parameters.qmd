@@ -171,7 +171,4 @@ One limitation is that the model does not account for natural variability in an 
 
 ## Conclusion {.unnumbered .unlisted}
 
-In this project, we used a simple one-variable model to study how an external instruction can influence an athlete's preference between two abstract movement patterns. Without instruction ($I = 0$), the model has two stable preferences, one for Pattern A ($x \approx -1.225$) and one for Pattern B ($x \approx +1.225$), separated by an unstable equilibrium at $x = 0$. In this case, the starting preference decides which pattern is reached, and the Euler simulations confirm that no switch occurs.
-
-A positive instruction changes this picture. With $I = 0.70$, only the stable preference for Pattern B remains ($x \approx +1.450$), so both starting preferences end up there, and the one starting at $x(0) = -1.8$ switches from Pattern A to Pattern B. With a weaker instruction ($I = 0.40$), both stable preferences still exist and the preference starting at $x(0) = -1.8$ stays with Pattern A. The instruction therefore has to be strong enough, and not only positive, to cause a switch.
-
+We used a simple one-variable model to study how an external instruction influences the preference between two abstract movement patterns. Without instruction ($I = 0$), two stable preferences coexist ($x \approx \pm 1.225$) and the starting preference decides the outcome. With $I = 0.70$, only the stable preference for Pattern B remains ($x \approx +1.450$), so a preference starting at $x(0) = -1.8$ switches to Pattern B. With $I = 0.40$, no switch occurs: the instruction must be strong enough, not only positive.
