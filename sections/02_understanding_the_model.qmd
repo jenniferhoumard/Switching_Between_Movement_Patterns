@@ -18,7 +18,7 @@ It is a cubic term. Since $b$ is positive, $-bx^{3}$ and $x$ have opposite signs
 $I$ is a constant. When $I$ is positive, it favours pattern B. When $I$ is negative, it favours pattern A. $I$ is an external component, that is to say, it is not influenced by the preference $x$. It can be interpreted as an instruction given to the athlete, for example from a coach. This instruction could be about the timing or the direction of the movement. The coach can give the same instruction whether the athlete prefers pattern A or pattern B (i.e $I$ is external to $x$). In this model, $I$ remains constant during each simulation so we can study how the coordination preference changes under a given instruction. However, we can change its value between simulations to compare the effects of different instructions.
 
 4. **Combined effect:**
-All these terms act together to determine how the preference evolves. Depending on their combined effect, the preference increases ($\dot{x} > 0$), decreases ($\dot{x} < 0$) or remains constant ($\dot{x} = 0$).
+All these terms act together to determine how the preference evolves. Depending on their combined effect, the preference increases ($\dot{x} > 0$), decreases ($\dot{x} < 0$) or remains constant ($\dot{x} = 0$). Refer to [Appendix A](#appendix-a) for a visual illustration of the individual model terms and the effect of the instruction.
 
 ## Meaning of an equilibrium
 

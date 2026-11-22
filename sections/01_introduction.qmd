@@ -11,3 +11,5 @@ To investigate how a change in a constraint can affect the stability of coordina
 ## Objectives and scientific approach
 
 To answer this research question, we use a simplified mathematical model to describe how the preference between Pattern A and Pattern B changes over time. First, we explain the model and identify its equilibria, determining which are stable or unstable when no instruction is applied ($I = 0$). We then use Euler's method in Python to simulate how the preference changes over time, starting from two different initial values ($x(0) = -1.8$ and $x(0) = +1.8$). Next, we repeat the equilibrium analysis and simulations with an instruction favouring Pattern B ($I = 0.70$), using the same initial values. Finally, we compare both conditions to examine how the instruction affects stability and the evolution of the coordination preference. As an additional analysis, we also test a weaker positive instruction ($I=0.40$) to investigate whether instruction strength matters.  
+
+\newpage

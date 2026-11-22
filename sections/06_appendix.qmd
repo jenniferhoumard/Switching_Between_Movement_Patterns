@@ -11,18 +11,28 @@ The following appendices organise the Python code by report section.
 ::: {#appendix-a}
 \begin{center}
 \textbf{Appendix A}\\
-\textbf{Python Code for Section 03: Equilibria and Stability}
+\textbf{Model Visualizations andPython Code for Section 03: Equilibria and Stability}
 \end{center}
 :::
 
-## Libraries and Imports {.unnumbered .unlisted}
+## Visual Interpretation of the Model {.unnumbered .unlisted}
+
+The following graphs illustrate how different terms affect the rate of change of the coordination preference $x$. 
+
+![Contribution of each term in the model for $I=0$. The linear term $ax$ amplifies the preference, pushing the preferance away from zero, while the cubic term $-bx^3$ acts in the opposite direction, getting stronger as $|x|$ increases. The combined curve shows their total effect and how these terms determine whether the preference increases or decreases. *Note.* Graph created by the authors using Desmos Graphing Calculator [@desmos].](figures/desmos_terms.png){#fig-desmos-terms width=80%}
+
+![Effect of changing the instruction $I$. Changing $I$ shifts the curve vertically without changing its shape. This changes the number and position of the equilibria. For $I=0$ and $I=0.40$, there are three equilibria, while for $I=0.70$, there is only one. *Note.* Graph created by the authors using Desmos Graphing Calculator [@desmos].](figures/desmos_instruction.png){#fig-desmos-instruction width=80%}
+
+## Python Code for Section 03: Equilibria and Stability {.unnumbered .unlisted}
+
+### Libraries and Imports {.unnumbered .unlisted}
 
 ```python
 import numpy as np
 import matplotlib.pyplot as plt
 ```
 
-## Model Functions {.unnumbered .unlisted}
+### Model Functions {.unnumbered .unlisted}
 
 ```python
 def f(x, I):                                   # rate of change of the model: x_dot = ax - bx^3 + I
@@ -35,8 +45,7 @@ def equilibrium_points(I):                     # finds the values of x where f(x
     return np.sort(real_roots)                 # sorted from smallest to largest (one real root for I = 0.70)
 ```
 
-
-## Equilibria and Stability for $I=0$ {.unnumbered .unlisted}
+### Equilibria and Stability for $I=0$ {.unnumbered .unlisted}
 
 ```python
 eq = equilibrium_points(0.0)                   # calls equilibrium_points() defined above: the 3 equilibria for I = 0
@@ -45,7 +54,7 @@ eq = equilibrium_points(0.0)                   # calls equilibrium_points() defi
 stable = (f(eq - 0.01, 0.0) > 0) & (f(eq + 0.01, 0.0) < 0)  # 0.01: small enough to test each side of an equilibrium without reaching another one
 ```
 
-## Rate-of-Change Graph for $I=0$ {.unnumbered .unlisted}
+### Rate-of-Change Graph for $I=0$ {.unnumbered .unlisted}
 
 ```python
 x = np.linspace(-2, 2, 400)                    # 400 values of x between -2 and 2
@@ -360,7 +369,7 @@ The project was divided between three group members, with each member responsibl
 | Group member | Assigned Quarto documents |
 |---|---|
 | Jennifer Houmard (GitHub setup) | 01 Introduction, 05 Effect of Parameters |
-| Gaia Gassole | 02 Understanding the Model, 04 Euler Simulations |
+| Gaia Gassiole | 02 Understanding the Model, 04 Euler Simulations |
 | Chloé Gilles | 03 Equilibria and Stability, 06 Appendix |
 
 One member created the GitHub repository and prepared the initial Quarto project structure. Each section contained predefined headings and short guidelines explaining what needed to be included. This allowed members to work independently while following the same organisation.
@@ -374,9 +383,9 @@ A separate GitHub branch was created for each Quarto section.
 | Branch | Assigned member |
 |---|---|
 | 01_introduction | Jennifer Houmard |
-| 02_understanding_the_model | Gaia Gassole |
+| 02_understanding_the_model | Gaia Gassiole |
 | 03_equilibria_and_stability | Chloé Gilles |
-| 04_euler_simulations | Gaia Gassole |
+| 04_euler_simulations | Gaia Gassiole |
 | 05_effect_of_parameters | Jennifer Houmard |
 | 06_Appendix | Chloé Gilles |
 

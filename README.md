@@ -183,7 +183,7 @@ The project was divided between three group members. Each member was responsible
 | Group member | Assigned Quarto documents |
 |---|---|
 | Jennifer Houmard (GitHub setup) | 01 Introduction, 05 Effect of Parameters |
-| Gaia Gassole | 02 Understanding the Model, 04 Euler Simulations |
+| Gaia Gassiole | 02 Understanding the Model, 04 Euler Simulations |
 | Chloé Gilles | 03 Equilibria and Stability, 06 Appendix |
 
 One member created the GitHub repository and prepared the initial Quarto project structure. Each section contained predefined headings and short guidelines explaining what needed to be included.
@@ -199,9 +199,9 @@ A separate GitHub branch was created for each Quarto section.
 | Branch | Assigned member |
 |---|---|
 | `01_introduction` | Jennifer Houmard |
-| `02_understanding_the_model` | Gaia Gassole |
+| `02_understanding_the_model` | Gaia Gassiole |
 | `03_equilibria_and_stability` | Chloé Gilles |
-| `04_euler_simulations` | Gaia Gassole |
+| `04_euler_simulations` | Gaia Gassiole |
 | `05_effect_of_parameters` | Jennifer Houmard |
 | `06_Appendix` | Chloé Gilles |
 
